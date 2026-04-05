@@ -1,3 +1,25 @@
 html, body, #root {
+    /* https://coolors.co/palette/0d1321-1d2d44-3e5c76-748cab-f0ebd8 */
+    --ink-black: #0d1321ff;
+    --deep-space-blue: #1d2d44ff;
+    --blue-slate: #3e5c76ff;
+    --dusty-denim: #748cabff;
+    --eggshell: #f0ebd8ff;
     text-align: center;
+    background-color: var(--ink-black);
+    color: var(--eggshell);
+}
+
+/* Applies to links that haven't been visited yet. */
+a:link {
+    color: var(--dusty-denim);
+}
+a:visited {
+    color: var(--blue-slate);
+}
+/*a:hover {
+    color: var(--eggshell);
+}*/
+a:active {
+    color: var(--eggshell);
 }

@@ -10,6 +10,10 @@ class Controller {
 
   private async get_vacations(request: Request, response: Response) {
     const vacations = await service.getAllVacations();
+    if(vacations === undefined) {
+      response.status(503);
+      return;
+    }
     response.json(vacations);
   }
 }

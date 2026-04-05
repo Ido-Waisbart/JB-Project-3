@@ -1,9 +1,10 @@
+import { Container, Typography } from "@mui/material";
 import "./Header.css";
 
 export function Header() {
     return (
-        <div className="Header">
-			<h1>Full Stack</h1>
-        </div>
+        <Container className="Header">
+			<Typography variant="h3">Waisbart's Vacation Wasteland</Typography>
+        </Container>
     );
 }

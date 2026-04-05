@@ -1,5 +1,4 @@
-// TODO: Cleanup
-
+// From the backend. TODO: Move elsewhere. Shared folder for both frontend and backend?
 export class VacationModel {
     public id!: number;
     public destination!: string;
