@@ -9,12 +9,18 @@ class Controller {
   }
 
   private async get_vacations(request: Request, response: Response) {
-    const vacations = await service.getAllVacations();
-    if(vacations === undefined) {
-      response.status(503);
-      return;
+    try {
+      const vacations = await service.getAllVacations();  // May throw error.
+      response.json(vacations);
     }
-    response.json(vacations);
+    catch (e: any) {
+      console.error("Controller error:", e);
+
+      response.status(500).json({
+        message: "Database error",
+        details: e.message,
+      });
+    }
   }
 }
 

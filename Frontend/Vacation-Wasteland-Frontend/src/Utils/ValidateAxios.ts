@@ -10,20 +10,28 @@ const NOTIFICATION_COOLDOWN_MS = 3000; // 3 seconds cooldown for same error type
 function shouldShowNotification(errorKey: string): boolean {
     const now = Date.now();
     const lastShown = recentNotifications.get(errorKey);
-    
+
     if (lastShown === undefined || (now - lastShown) > NOTIFICATION_COOLDOWN_MS) {
         recentNotifications.set(errorKey, now);
         return true;
     }
-    
+
     return false;
 }
 
 export function validateAxios(error: any) {
     if (axios.isAxiosError(error)) {
+
         // Axios error (HTTP error, network error, etc.)
         if (error.response) {
             // Server responded with a status outside 2xx
+
+            // serverMessage was proposed by ChatGPT, to make sure the error details are not omitted as I've noticed.
+            // Likely only works for proper axios errors with responses.
+            const serverMessage =
+                error.response.data?.details ||
+                error.response.data?.message ||
+                JSON.stringify(error.response.data);
 
             if (error.response.status === statusTooManyRequests) {
                 const errorKey = 'rate-limit-429';
@@ -34,8 +42,9 @@ export function validateAxios(error: any) {
             else {
                 const errorKey = `http-error-${error.response.status}`;
                 if (shouldShowNotification(errorKey)) {
-                    // notify.error('HTTP error:', error.response.status.toString() + " - " + error.response.statusText);
-                    notify.error('HTTP error: ' + error.response.status.toString() + " - " + error.response.statusText);
+                    // console.log(JSON.stringify(error.toJSON()));  // Axios’ toJSON() intentionally strips out response.data and custom payloads.
+                    // console.log(serverMessage);  // Works. May be useful for debugging.
+                    notify.error('HTTP error: ' + error.response.status.toString() + " - " + error.response.statusText + ". " + serverMessage);
                 }
             }
         } else if (error.request) {

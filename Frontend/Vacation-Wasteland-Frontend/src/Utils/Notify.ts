@@ -4,7 +4,7 @@ class Notify {
 
     private notyf = new Notyf({
         position: { x: "center", y: "top" },
-        duration: 3000,
+        duration: 5000,
         dismissible: true,
         ripple: true,  // Ripple = אדווה = גל קטן
         types: [

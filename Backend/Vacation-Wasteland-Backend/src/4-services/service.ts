@@ -11,25 +11,10 @@ class Service {
     let vacations;
     try {
       vacations = (await dal.execute(sql)) as VacationModel[];
-
-      /*console.log("About to invoke execute manually");
-
-      const fn = dal.execute;
-
-      console.log("Type of fn:", typeof fn);
-
-      try {
-        const result = fn.call(dal, sql); // FORCE invocation
-        console.log("Invocation returned:", result);
-
-        vacations = await result;
-        console.log("Await finished");
-      } catch (e) {
-        console.error("Invocation error:", e);
-      }*/
     } catch (error: any) {
       console.error("DB/SQL error:", error);
-      return undefined; // TODO: Return error of some sort?
+      // return undefined; // TODO: Return error of some sort?
+      throw error;  // The controller has to handle this error, not the service.
     }
     console.log("Finished executing SQL.");
     return vacations;
