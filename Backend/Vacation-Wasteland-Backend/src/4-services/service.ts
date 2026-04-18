@@ -16,7 +16,7 @@ class Service {
       // return undefined; // TODO: Return error of some sort?
       throw error;  // The controller has to handle this error, not the service.
     }
-    console.log("Finished executing SQL.");
+    // console.log("Finished executing SQL.");
     return vacations;
   }
 }

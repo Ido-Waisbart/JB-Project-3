@@ -25,7 +25,7 @@ const VacationPanel: React.FC<VacationPanelProps> = (props: VacationPanelProps) 
     }}>
       {/* <Stack> */}
       <Box sx={{
-        height: "25%",
+        flex: "0 0 25%",
         display: "flex",
         flexDirection: "column",
         justifyContent: "center",
@@ -35,15 +35,15 @@ const VacationPanel: React.FC<VacationPanelProps> = (props: VacationPanelProps) 
         <Typography>{new Date(props.vacation.start_date).toLocaleDateString("he-IL")} - {new Date(props.vacation.end_date).toLocaleDateString("he-IL")}</Typography>
       </Box>
       <Box sx={{
-        flex: 1,
+        flex: "1 1 auto", minHeight: 0,  /*flex items' min-height default to auto, allowing the image to become too big in this case.*/
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
       }}>
-        <Box component="img" src={props.vacation.image_uri ?? "dirthut.jpg"} sx={{ width: "100%", height: "100%", }} />
+        <Box component="img" src={props.vacation.image_uri ?? "dirthut.jpg"} sx={{ width: "100%", height: "100%", objectFit: "cover", }} />
       </Box>
       <Box sx={{
-        height: "20%",
+        flex: "0 0 20%",
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
