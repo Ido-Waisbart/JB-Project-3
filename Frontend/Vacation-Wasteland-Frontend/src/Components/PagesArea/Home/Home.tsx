@@ -6,12 +6,14 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { AppState } from "../../../Redux/AppState";
 
-var vacations: VacationModel[] = [
+var vacations: VacationModel[] = [];
+/*var vacations: VacationModel[] = [
   { id: 1, destination: "italy", start_date: new Date("2026-01-30"), end_date: new Date(), price_in_usd: 100 },
   { id: 2, destination: "lala land", start_date: new Date(), end_date: new Date(), price_in_usd: 21 },
   { id: 3, destination: "wackoo land", start_date: new Date(), end_date: new Date(), price_in_usd: 333, image_uri: "1" },
   { id: 4, destination: "batman land", start_date: new Date(), end_date: new Date(), price_in_usd: 42 },
 ]; // TODO: Get from backend, which gets from MySQL database.
+*/
 
 // TODO: Move me elsewhere.
 type VacationPanelProps = {
