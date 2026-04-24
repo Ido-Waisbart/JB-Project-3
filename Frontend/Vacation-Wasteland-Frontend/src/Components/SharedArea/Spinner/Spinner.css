@@ -1,0 +1,11 @@
+.Spinner {
+	display: inline-block;
+    width: 200px;
+    height: 200px;
+}
+
+.Spinner > img {
+    width: 100%;
+    height: 100%;
+}
+

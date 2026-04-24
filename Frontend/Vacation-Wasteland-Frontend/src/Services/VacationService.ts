@@ -37,7 +37,8 @@ class VacationService {
             catch (error: any) {
                 this.loadingVacationsPromise = null; // Clear the promise after error
                 validateAxios(error);
-                return [];
+                // return [];  // Not good - The Home page cannot do setError().
+                throw error;
             }
         })();
 
