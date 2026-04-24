@@ -10,7 +10,10 @@ export class VacationModel {
     public price_in_usd!: number;
     // public image_uri: string;
     // public image_uri!: string;
-    public image_uri?: string;
+    // public image_uri?: string;  // Unneeded? Based on Northwind Full Stack, yes.
+    
+    public image_url?: string;
+    public image?: File;
 
     /*public constructor(vacation: VacationModel) {
         this.id = vacation.id;

@@ -42,7 +42,7 @@ const VacationPanel: React.FC<VacationPanelProps> = (props: VacationPanelProps) 
         justifyContent: "center",
         alignItems: "center",
       }}>
-        <Box component="img" src={props.vacation.image_uri ?? "dirthut.jpg"} sx={{ width: "100%", height: "100%", objectFit: "cover", }} />
+        <Box component="img" src={props.vacation.image_url ?? "dirthut.jpg"} sx={{ width: "100%", height: "100%", objectFit: "cover", }} />
       </Box>
       <Box sx={{
         flex: "0 0 20%",

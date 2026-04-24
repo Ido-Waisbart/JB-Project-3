@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 8.0.44, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.45, for Win64 (x86_64)
 --
--- Host: 127.0.0.1    Database: jb-project3
+-- Host: localhost    Database: vacation_wasteland
 -- ------------------------------------------------------
--- Server version	8.0.44
+-- Server version	8.0.45
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -98,7 +98,7 @@ CREATE TABLE `vacations` (
 
 LOCK TABLES `vacations` WRITE;
 /*!40000 ALTER TABLE `vacations` DISABLE KEYS */;
-INSERT INTO `vacations` VALUES (3,'Lahaina, Hawaii','It\'s time to take a break and relax by the ocean on a Lahaina vacation.','2025-11-14','2025-11-29',1049.00,'lahaina.jpg'),(4,'Athens, Greece','A popular tourism location among many middle-eastern residents, loved for its comfortably sunny weather and affordability.','2026-05-03','2026-06-03',450.00,'athens.webp'),(5,'Väckelsång, Sweden','A locality in Sweden, and the proud host of the Game Collective, a group of tight-knit craftsmen.','2026-07-01','2026-07-13',200.00,'väckelsång.avif'),(7,'Hope Harbor, Norway','A secluded harbor in a small island on Norway\'s borders. This quiet place is filled with a plethora of wildlife and seaside houses and shops.','2025-11-29','2025-12-20',329.00,'hope_harbor.webp'),(8,'Mission Bay, New Zealand','A beach laying next to a dense forest and a popular marketplace.','2026-08-29','2026-09-02',799.00,'mission_bay.jpg'),(9,'Aulani, Hawaii','A very tropical and well established hotel, vivid with bright blue and green sceneries, and impressively grand hotel buildings.','2026-06-14','2026-07-14',999.00,'aulani.png'),(12,'Vienna, Austria','A ticket to the lofty, urban and very popular Vienna. Tickets include a trip to and from Vienna, including a trip group touring through the city\'s most prominent landmarks.','2025-12-26','2026-01-01',849.00,'vienna.jpg'),(13,'Kyoto, Japan','Experience the historic temples, traditional streets, and seasonal cherry blossoms of Kyoto.','2026-03-15','2026-03-25',1200.00,'kyoto.jpg'),(14,'Reykjavik, Iceland','A northern getaway filled with geothermal pools, volcanic landscapes, and northern lights.','2026-01-10','2026-01-18',1350.00,'reykjavik.jpg'),(15,'Barcelona, Spain','A vibrant coastal city known for its architecture, beaches, and rich cultural life.','2026-06-05','2026-06-15',980.00,'barcelona.jpg'),(16,'Banff, Canada','A mountain escape in the Canadian Rockies featuring lakes, hiking trails, and wildlife.','2026-07-20','2026-07-28',1100.00,'banff.jpg'),(17,'Cape Town, South Africa','A dramatic coastal city beneath Table Mountain, offering beaches, nature, and urban exploration.','2026-09-10','2026-09-20',1150.00,'cape_town.jpg');
+INSERT INTO `vacations` VALUES (3,'Lahaina, Hawaii','It\'s time to take a break and relax by the ocean on a Lahaina vacation.','2025-11-14','2025-11-29',1049.00,'lahaina.jpg'),(4,'Athens, Greece','A popular tourism location among many middle-eastern residents, loved for its comfortably sunny weather and affordability.','2026-05-03','2026-06-03',450.00,'athens.webp'),(5,'Väckelsång, Sweden','A locality in Sweden, and the proud host of the Game Collective, a group of tight-knit craftsmen.','2026-07-01','2026-07-13',200.00,'väckelsång.avif'),(7,'Hope Harbor, Norway','A secluded harbor in a small island on Norway\'s borders. This quiet place is filled with a plethora of wildlife and seaside houses and shops.','2025-11-29','2025-12-20',329.00,'hope_harbor.webp'),(8,'Mission Bay, New Zealand','A beach laying next to a dense forest and a popular marketplace.','2026-08-29','2026-09-02',799.00,'mission_bay.jpg'),(9,'Aulani, Hawaii','A very tropical and well established hotel, vivid with bright blue and green sceneries, and impressively grand hotel buildings.','2026-06-14','2026-07-14',999.00,'aulani.png'),(12,'Vienna, Austria','A ticket to the lofty, urban and very popular Vienna. Tickets include a trip to and from Vienna, including a trip group touring through the city\'s most prominent landmarks.','2025-12-26','2026-01-01',849.00,'vienna.jpg'),(13,'Kyoto, Japan','Experience the historic temples, traditional streets, and seasonal cherry blossoms of Kyoto.','2026-03-15','2026-03-25',1200.00,'kyoto.jpg'),(14,'Reykjavik, Iceland','A northern getaway filled with geothermal pools, volcanic landscapes, and northern lights.','2026-01-10','2026-01-18',1350.00,'reykjavik.jpg'),(15,'Barcelona, Spain','A vibrant coastal city known for its architecture, beaches, and rich cultural life.','2026-06-05','2026-06-15',980.00,'barcelona.jpg'),(16,'Banff, Canada','A mountain escape in the Canadian Rockies featuring lakes, hiking trails, and wildlife.','2026-07-20','2026-07-28',1100.00,'banff.jpg'),(17,'Cape Town, South Africa','A dramatic coastal city beneath Table Mountain, offering beaches, nature, and urban exploration.','2026-09-10','2026-09-20',1150.00,'cape_town.png');
 /*!40000 ALTER TABLE `vacations` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -111,4 +111,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2026-04-22 19:54:58
+-- Dump completed on 2026-04-24  6:49:00

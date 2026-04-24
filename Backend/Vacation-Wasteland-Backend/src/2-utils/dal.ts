@@ -28,7 +28,7 @@ class Dal {
         reject(new Error("Query timeout"));
       }, 5000);
 
-      //   console.log("Querying with " + JSON.stringify(this.options));
+      // console.log("Querying with " + JSON.stringify(this.options));
       this.connection.query(
         sql,
         values,
