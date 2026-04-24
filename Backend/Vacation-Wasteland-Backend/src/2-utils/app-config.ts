@@ -12,6 +12,9 @@ class AppConfig {
     public readonly mysqlDatabase = process.env.MYSQL_DATABASE;
     public readonly imagesLocation = process.env.IMAGES_LOCATION!;
     public readonly jwtSecret = process.env.JWT_SECRET!;
+    public readonly hashSalt = process.env.HASH_SALT!;
+    // public readonly recaptchaSecretKey = process.env.RECAPTCHA_SECRET_KEY!;
+    // public readonly recaptchaUrl = "https://www.google.com/recaptcha/api/siteverify";
 }
 
 export const appConfig = new AppConfig();

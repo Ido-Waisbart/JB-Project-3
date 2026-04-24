@@ -12,12 +12,15 @@
         "@types/express": "catalog:",
         "@types/express-fileupload": "^1.5.1",
         "@types/joi": "^17.2.2",
+        "@types/jsonwebtoken": "^9.0.10",
         "@types/node": "catalog:",
         "nodemon": "^3.1.11",
+        "striptags": "^3.2.0",
         "ts-node": "^10.9.2",
         "typescript": "catalog:"
     },
     "dependencies": {
+        "axios": "^1.14.0",
         "cors": "^2.8.5",
         "dotenv": "^17.2.3",
         "express": "^5.2.1",

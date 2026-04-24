@@ -10,16 +10,19 @@ class VacationController {
 
   public constructor() {
     // TODO: Choose which API routes here and in users and maybe in likes can be accessed by users/admins only. Keep the routes untokened for ease of development.
-    this.router.get("/api/vacations", this.getVacations);
-    this.router.get("/api/vacations/:id", this.getOneVacation);
-    this.router.post("/api/vacations", this.addVacation);
-    this.router.put("/api/vacations/:id", this.updateVacation);
-    this.router.delete("/api/vacations/:id", this.deleteVacation);
-    // this.router.post("/api/vacations", securityMiddleware.verifyToken, this.addVacation);
-    // this.router.put("/api/vacations/:id", securityMiddleware.verifyToken, this.updateVacation);
-    // this.router.delete("/api/vacations/:id", securityMiddleware.verifyAdmin, this.deleteVacation);
+    this.router.get("/api/vacations", securityMiddleware.verifyToken, this.getVacations);
+    this.router.get("/api/vacations/:id", securityMiddleware.verifyToken, this.getOneVacation);
+    this.router.post("/api/vacations", securityMiddleware.verifyToken, this.addVacation);
+    this.router.put("/api/vacations/:id", securityMiddleware.verifyToken, this.updateVacation);
+    this.router.delete("/api/vacations/:id", securityMiddleware.verifyAdmin, this.deleteVacation);
+    this.router.get("/api/vacations/images/:imageName", securityMiddleware.verifyToken, this.getImage);  // This is used at getAllVacations(), getOneVacation() via: appConfig.imagesLocation = "http://localhost:4000/api/vacations/images/"
+    // this.router.get("/api/vacations", this.getVacations);
+    // this.router.get("/api/vacations/:id", this.getOneVacation);
+    // this.router.post("/api/vacations", this.addVacation);
+    // this.router.put("/api/vacations/:id", this.updateVacation);
+    // this.router.delete("/api/vacations/:id", this.deleteVacation);
     // this.router.get("/api/vacations-by-price/:min/:max", this.getVacationsByPriceRange);
-    this.router.get("/api/vacations/images/:imageName", this.getImage); // TODO: Where is this used? Answer: IMAGES_LOCATION = BE's appConfig.imagesLocation = "http://localhost:4000/api/vacations/images/"; getAllVacations(), getOneVacation()
+    // this.router.get("/api/vacations/images/:imageName", this.getImage);  // This is used at getAllVacations(), getOneVacation() via: appConfig.imagesLocation = "http://localhost:4000/api/vacations/images/"
   }
 
   private async getVacations(request: Request, response: Response) {
