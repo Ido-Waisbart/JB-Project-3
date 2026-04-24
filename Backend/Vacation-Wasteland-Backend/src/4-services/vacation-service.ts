@@ -2,7 +2,7 @@ import { appConfig } from "../2-utils/app-config";
 import { dal } from "../2-utils/dal";
 import { VacationModel } from "../3-models/vacation-model";
 
-class Service {
+class VacationService {
   public async getAllVacations(): Promise<VacationModel[] | undefined> {
     // let v: VacationModel = {id: 1, destination: "wah", description: "hoo", start_date: new Date(), end_date: new Date(), price_in_usd: 69};
     // return [v];
@@ -16,7 +16,6 @@ class Service {
       vacations = (await dal.execute(sql, values)) as VacationModel[];
     } catch (error: any) {
       console.error("DB/SQL error:", error);
-      // return undefined; // TODO: Return error of some sort?
       throw error; // The controller has to handle this error, not the service.
     }
     console.log("Finished executing SQL: " + sql);
@@ -35,4 +34,4 @@ class Service {
   }
 }
 
-export const service = new Service();
+export const vacation_service = new VacationService();

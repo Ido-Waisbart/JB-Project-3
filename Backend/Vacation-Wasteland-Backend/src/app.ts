@@ -1,11 +1,13 @@
 import cors from "cors";
 import express from "express";
-import { appConfig } from "./2-utils/app-config";
-import { controller } from "./5-controllers/controller";
-import { errorsMiddleware } from "./6-middleware/errors-middleware";
+import path from "path";
 import { fileSaver } from "uploaded-file-saver";
 import expressFileUpload from "express-fileupload"
-import path from "path";
+
+import { appConfig } from "./2-utils/app-config";
+import { vacation_controller } from "./5-controllers/vacation-controller";
+import { user_controller } from "./5-controllers/user-controller";
+import { errorsMiddleware } from "./6-middleware/errors-middleware";
 
 class App {
   public start(): void {
@@ -19,8 +21,9 @@ class App {
       const imageLocation = path.join(__dirname, "1-assets", "images");
       fileSaver.config(imageLocation); // Tell this library where to save uploaded images.
 
-      server.use(controller.router);
-      
+      server.use(vacation_controller.router);
+      server.use(user_controller.router);
+
       server.use(errorsMiddleware.routeNotFound);
       server.use(errorsMiddleware.catchAll);
       server.listen(appConfig.port, () =>
