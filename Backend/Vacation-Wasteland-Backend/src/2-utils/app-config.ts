@@ -11,7 +11,7 @@ class AppConfig {
     public readonly mysqlPassword = process.env.MYSQL_PASSWORD;
     public readonly mysqlDatabase = process.env.MYSQL_DATABASE;
     public readonly imagesLocation = process.env.IMAGES_LOCATION!;
-    // public readonly jwtSecret = process.env.JWT_SECRET!;
+    public readonly jwtSecret = process.env.JWT_SECRET!;
 }
 
 export const appConfig = new AppConfig();

@@ -4,7 +4,8 @@ import { VacationModel } from "../3-models/vacation-model";
 
 class VacationService {
   public async getAllVacations(): Promise<VacationModel[] | undefined> {
-    // let v: VacationModel = {id: 1, destination: "wah", description: "hoo", start_date: new Date(), end_date: new Date(), price_in_usd: 69};
+    // Debug data:
+    // let v: VacationModel = {id: 1, destination: "Somewhere in Nevada", description: "USA", start_date: new Date(), end_date: new Date(), price_in_usd: 799};
     // return [v];
 
     const sql = "select *, concat(?, image_uri) as image_url from vacations";

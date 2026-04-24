@@ -8,3 +8,8 @@ export enum StatusCode {
     NotFound = 404,
     InternalServerError = 500
 }
+
+export enum Role {
+    Admin = "admin",
+    User = "user"
+}

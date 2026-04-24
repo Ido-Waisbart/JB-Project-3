@@ -1,5 +1,6 @@
 // TODO: Cleanup
 
+import joi from "joi";
 import { UploadedFile } from "express-fileupload";
 import { ValidationError } from "./client-errors";
 
@@ -31,19 +32,21 @@ export class VacationModel {
     }
 
     // joi schema - specify what is legal for each field:
-    /*private static schema = joi.object({
+    private static schema = joi.object({
         id: joi.number().optional().positive().integer(),
-        name: joi.string().required().min(2).max(100),
-        price: joi.number().required().min(0).max(1000),
-        stock: joi.number().required().min(0).max(1000).integer(),
+        destination: joi.string().required().min(2).max(100),
+        description: joi.string().required().min(2).max(1000),
+        start_date: joi.date().required(),
+        end_date: joi.date().required(),
+        price_in_usd: joi.number().required().min(0).max(100000),
         image: joi.object().optional(),
-        imageUrl: joi.string().optional().max(255),
-        imageName: joi.string().optional().max(50)
+        image_url: joi.string().optional().max(255),
+        image_uri: joi.string().optional().max(50)
     });
 
     // Validate this product against the schema:
     public validate(): void {
         const result = VacationModel.schema.validate(this);
         if (result.error) throw new ValidationError(result.error.message);
-    }*/
+    }
 }

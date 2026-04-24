@@ -6,6 +6,7 @@ class VacationController {
   public router: Router = express.Router();
 
   public constructor() {
+    // TODO: Choose which API routes here and in users and maybe in likes can be accessed by users/admins only. Keep the routes untokened for ease of development.
     this.router.get("/api/vacations", this.getVacations);
     this.router.get("/api/vacations/images/:imageName", this.getImage);  // TODO: Where is this used? Answer: IMAGES_LOCATION = BE's appConfig.imagesLocation = "http://localhost:4000/api/vacations/images/"; getAllVacations(), getOneVacation()
   }

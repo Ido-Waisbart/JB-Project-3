@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import { cyber } from "../2-utils/cyber";
-import { UnauthorizedError } from "../3-models/errors";
+import { UnauthorizedError } from "../3-models/client-errors";
 
 class SecurityMiddleware {
 
