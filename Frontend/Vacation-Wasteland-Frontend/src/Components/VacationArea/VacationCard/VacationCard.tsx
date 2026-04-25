@@ -1,11 +1,33 @@
-import { Box, Card, Container, Typography } from "@mui/material";
+import { Box, Card, Chip, Container, Typography } from "@mui/material";
+import FavoriteIcon from "@mui/icons-material/Favorite";
 import "./VacationCard.css";
 import { VacationModel } from "../../../Models/VacationModel";
+import { likeService } from "../../../Services/LikeService";
+import { useSelector } from "react-redux";
+import { AppState } from "../../../Redux/AppState";
+import { LikeModel } from "../../../Models/LikeModel";
+import { useState } from "react";
 
 type VacationPanelProps = {
     vacation: VacationModel;
+    likedByUser: boolean; // Initially?
+    totalLikes: number; // Initial?
 };
 export const VacationPanel: React.FC<VacationPanelProps> = (props: VacationPanelProps) => {
+    const user = useSelector((state: AppState) => state.userState!);
+    const [likedByUser, setLikedByUser] = useState<boolean>(props.likedByUser);
+    const [totalLikes, setTotalLikes] = useState<number>(props.totalLikes);
+    function handleToggleFavorite() {
+        if (likedByUser) {
+            likeService.deleteLike({ user_id: user.id, vacation_id: props.vacation.id } as LikeModel);
+            setTotalLikes(totalLikes - 1);
+        } else {
+            likeService.addLike({ user_id: user.id, vacation_id: props.vacation.id } as LikeModel);
+            setTotalLikes(totalLikes + 1);
+        }
+        setLikedByUser(!props.likedByUser);
+    }
+
     return (
         <Card
             className="VacationPanel"
@@ -18,7 +40,6 @@ export const VacationPanel: React.FC<VacationPanelProps> = (props: VacationPanel
                 flexDirection: "column",
             }}
         >
-            {/* TODO: <Stack> */}
             <Box
                 sx={{
                     flex: "0 0 25%",
@@ -44,12 +65,29 @@ export const VacationPanel: React.FC<VacationPanelProps> = (props: VacationPanel
                     display: "flex",
                     justifyContent: "center",
                     alignItems: "center",
+                    position: "relative",
                 }}
             >
                 <Box
                     component="img"
                     src={props.vacation.image_url ?? "dirthut.jpg"}
                     sx={{ width: "100%", height: "100%", objectFit: "cover" }}
+                />
+                <Chip
+                    clickable
+                    onClick={handleToggleFavorite}
+                    icon={<FavoriteIcon />}
+                    label={"Like " + totalLikes}
+                    size="small"
+                    color={likedByUser ? "primary" : "info"}
+                    sx={{
+                        position: "absolute",
+                        top: 8,
+                        left: 8,
+                        height: 24,
+                        fontWeight: "bold",
+                        boxShadow: 3,
+                    }}
                 />
             </Box>
             <Box
@@ -83,7 +121,6 @@ export const VacationPanel: React.FC<VacationPanelProps> = (props: VacationPanel
                     </Box>
                 </Container>
             </Box>
-            {/* </Stack> */}
         </Card>
     );
 };

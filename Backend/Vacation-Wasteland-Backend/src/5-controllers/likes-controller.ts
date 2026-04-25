@@ -3,6 +3,7 @@ import { like_service } from "../4-services/like-service";
 import { LikeModel } from "../3-models/like-model";
 import { StatusCode } from "../3-models/enums";
 import { securityMiddleware } from "../6-middleware/security-middleware";
+import { cyber } from "../2-utils/cyber";
 
 class LikeController {
   public router: Router = express.Router();
@@ -12,7 +13,7 @@ class LikeController {
     this.router.get("/api/likes", securityMiddleware.verifyToken, this.getLikes);
     this.router.post("/api/likes", securityMiddleware.verifyToken, this.addLike);
     // this.router.put("/api/likes/:id", securityMiddleware.verifyToken, this.updateLike);
-    this.router.delete("/api/likes/:id", securityMiddleware.verifyToken, this.deleteLike);
+    this.router.delete("/api/likes/:user_id/:vacation_id", securityMiddleware.verifyToken, this.deleteLike);
   }
 
   private async getLikes(request: Request, response: Response) {

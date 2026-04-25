@@ -1,4 +1,4 @@
-import { Box, Card, Container, Divider, Grid, Stack, Typography, useTheme } from "@mui/material";
+import { Box, Container, Divider, Stack, Typography, useTheme } from "@mui/material";
 import "./Home.css";
 import { VacationModel } from "../../../Models/VacationModel";
 import { vacationService } from "../../../Services/VacationService";
@@ -7,10 +7,10 @@ import { useSelector } from "react-redux";
 import { AppState } from "../../../Redux/AppState";
 import { VacationPanel } from "../../VacationArea/VacationCard/VacationCard";
 import { Spinner } from "../../SharedArea/Spinner/Spinner";
-import { BarChart } from "@mui/x-charts/BarChart";
 import { likeService } from "../../../Services/LikeService";
+import { LikeModel } from "../../../Models/LikeModel";
 
-var vacations: VacationModel[] = [];
+// var vacations: VacationModel[] = [];
 // Helpful debug data:
 /*var vacations: VacationModel[] = [
   { id: 1, destination: "italy", start_date: new Date("2026-01-30"), end_date: new Date(), price_in_usd: 100 },
@@ -25,6 +25,7 @@ export function Home() {
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<boolean>(false);
     const allVacations = useSelector((state: AppState) => state.vacationState.vacations);
+    const user = useSelector((state: AppState) => state.userState!); // ASSUMPTION: If the user was able to access Home.tsx, then userState is surely not null.
     const allLikes = useSelector((state: AppState) => state.likeState.likes);
 
     useEffect(() => {
@@ -79,11 +80,18 @@ export function Home() {
                             gap: "32px",
                         }}
                     >
-                        {vacations.map((vacation, i) => (
+                        {/* {vacations.map((vacation, i) => (
                             <VacationPanel vacation={vacation} key={i} />
-                        ))}
+                        ))} */}
                         {allVacations.map((vacation, i) => (
-                            <VacationPanel vacation={vacation} key={i} />
+                            <VacationPanel
+                                vacation={vacation}
+                                key={i}
+                                likedByUser={allLikes.some(
+                                    (like) => like.user_id === user.id && like.vacation_id === vacation.id,
+                                )}
+                                totalLikes={allLikes.filter((like) => like.vacation_id === vacation.id).length}
+                            />
                         ))}
                     </Container>
                 )}

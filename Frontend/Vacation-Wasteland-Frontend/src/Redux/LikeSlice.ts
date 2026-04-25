@@ -29,6 +29,37 @@ function initLikes(currentState: LikeSliceType, action: PayloadAction<LikeModel[
     return newState;  // Return the new state.
 }
 
+// Add like reducer: 
+function addLike(currentState: LikeSliceType, action: PayloadAction<LikeModel>): LikeSliceType {
+    const likeToAdd = action.payload; // Get the like to add.
+    const newState = {likes: [...currentState.likes]}; // Duplicating currentState.
+    newState.likes.push(likeToAdd); // Add the like.
+    return newState; // Return the new state.
+}
+
+// Update like reducer: 
+/*function updateLike(currentState: LikeSliceType, action: PayloadAction<LikeModel>): LikeSliceType {
+    const likeToUpdate = action.payload; // Get the like to update.
+    const newState = [...currentState]; // Duplicating currentState.
+    const index = newState.findIndex(p => p.id === likeToUpdate.id); // Find index to update (-1 if not found)
+    if (index >= 0) {
+        newState[index] = likeToUpdate; // Update.
+    }
+    return newState; // Return the new state.
+}*/
+
+// Delete like reducer: 
+function deleteLike(currentState: LikeSliceType, action: PayloadAction<LikeModel>): LikeSliceType {
+    const user_id = action.payload.user_id; // Get the like ids to delete.
+    const vacation_id = action.payload.vacation_id; // Get the like ids to delete.
+    const newState = {likes: [...currentState.likes]}; // Duplicating currentState.
+    const index = newState.likes.findIndex(like => like.user_id === user_id && like.vacation_id === vacation_id); // Find index to delete (-1 if not found).
+    if (index >= 0) {
+        newState.likes.splice(index, 1); // Delete from index one item.
+    }
+    return newState; // Return the new state.
+}
+
 export type LikeSliceType = {
     likes: LikeModel[];
 };
@@ -37,8 +68,6 @@ export const likeSlice = createSlice({
     name: "like-slice",
     initialState: {
         likes: [] as LikeModel[],
-        selectedLikes: [] as LikeModel[],
-        filteredLikes: [] as LikeModel[],
     } as LikeSliceType,
-    reducers: {initLikes,},
+    reducers: {initLikes, addLike, deleteLike,},
 });
