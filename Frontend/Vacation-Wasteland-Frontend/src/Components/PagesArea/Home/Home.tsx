@@ -7,6 +7,7 @@ import { useSelector } from "react-redux";
 import { AppState } from "../../../Redux/AppState";
 import { VacationPanel } from "../../VacationArea/VacationCard/VacationCard";
 import { Spinner } from "../../SharedArea/Spinner/Spinner";
+import { BarChart } from "@mui/x-charts/BarChart";
 
 var vacations: VacationModel[] = [];
 // Helpful debug data:
