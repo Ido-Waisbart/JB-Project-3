@@ -4,17 +4,24 @@ import { UserModel } from "../../../Models/UserModel";
 import { notify } from "../../../Utils/Notify";
 import { userService } from "../../../Services/UserService";
 import { useNavigate } from "react-router-dom";
-import { Button, ButtonGroup, Checkbox, FormControl, FormControlLabel, TextField, Typography } from "@mui/material";
-import { AccountCircle, Cancel, HowToReg } from "@mui/icons-material";
+import { Box, Button } from "@mui/material";
+import { AccountCircle, Cancel } from "@mui/icons-material";
 // import ReCAPTCHA from "react-google-recaptcha";
 import { appConfig } from "../../../Utils/AppConfig";
 import { useState } from "react";
+import { BetterTextField } from "../../SharedArea/Spinner/BetterTextField/BetterTextField";
 
 // https://developers.google.com/recaptcha/docs/faq
 
 export function Register() {
-
-    const { register, handleSubmit } = useForm<UserModel>();
+    const { control, register, handleSubmit, reset } = useForm<UserModel>({
+        defaultValues: {
+            first_name: "",
+            last_name: "",
+            email: "",
+            password: "",
+        },
+    });
     const navigate = useNavigate();
     // const [captchaToken, setCaptchaToken] = useState<string | null>("");
 
@@ -28,8 +35,7 @@ export function Register() {
             await userService.register(user);
             notify.success(`Welcome ${user.first_name} ${user.last_name}!`);
             navigate("/home");
-        }
-        catch (err: any) {
+        } catch (err: any) {
             notify.error(err);
         }
     }
@@ -40,36 +46,52 @@ export function Register() {
         setCaptchaToken(captchaToken);
     }*/
 
+    const handleReset = () => {
+        reset();
+        (document.activeElement as HTMLElement)?.blur();
+    };
+
     return (
         <div className="Register">
+            <form onSubmit={handleSubmit(send)} style={{ width: "400px", gap: "12px" }}>
+                {/* Note: If I used control (for proper resetting, see the start of BetterTextField.tsx), I don't need register(). */}
+                <BetterTextField control={control} name="first_name" label="First name" fullWidth required />
 
-            <Typography variant="h4" color="primary" className="spacing">
-                Register to Northwind
-                &nbsp;
-                <HowToReg fontSize="large" className="middle" />
-            </Typography>
+                <BetterTextField control={control} name="last_name" label="Last name" fullWidth required />
 
-            <FormControl onSubmit={handleSubmit(send)}>
+                <BetterTextField
+                    control={control}
+                    name="email"
+                    label="Email"
+                    type="email"
+                    fullWidth
+                    required
+                />
 
-                <TextField label="First name" fullWidth {...register("first_name")} required />
-
-                <TextField label="Last name" fullWidth {...register("last_name")} required />
-
-                <TextField label="Email" type="email" fullWidth {...register("email")} required />
-
-                <TextField label="Password" type="password" fullWidth {...register("password")} required />
-
-                <FormControlLabel label="Send me promotional emails" control={<Checkbox />} />
+                <BetterTextField
+                    control={control}
+                    name="password"
+                    label="Password"
+                    type="password"
+                    fullWidth
+                    required
+                />
 
                 {/* <ReCAPTCHA sitekey={appConfig.recaptchaSiteKey} onChange={saveCaptchaToken} /> */}
 
-                <ButtonGroup variant="contained" fullWidth>
-                    <Button type="submit" color="primary"> <AccountCircle /> &nbsp; Register</Button>
-                    <Button type="reset" color="secondary"> <Cancel /> &nbsp; Clear</Button>
-                </ButtonGroup>
-
-            </FormControl>
-
+                <Box sx={{ display: "flex", width: "100%", gap: "8px" }}>
+                    <Button type="submit" color="primary" variant="contained" sx={{ flex: 2.5 }}>
+                        {" "}
+                        <AccountCircle /> &nbsp; Register
+                    </Button>
+                    <Button type="button" onClick={handleReset} color="info" variant="contained" sx={{ flex: 1 }}>
+                        {" "}
+                        <Cancel /> &nbsp; Clear
+                    </Button>
+                    {/* <Button type="button" onClick={() => reset()} color="info" variant="contained" sx={{ flex: 1 }}> <Cancel /> &nbsp; Clear</Button> */}
+                    {/* <Button type="reset" color="info" variant="contained" sx={{ flex: 1 }}> <Cancel /> &nbsp; Clear</Button> */}
+                </Box>
+            </form>
         </div>
     );
 }

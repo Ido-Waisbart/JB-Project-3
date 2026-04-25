@@ -1,18 +1,24 @@
 // import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import { BrowserRouter } from 'react-router-dom'
-import { createTheme, CssBaseline, ThemeProvider } from '@mui/material';
-import React from 'react';
-import { Provider } from 'react-redux';
-import { Layout } from './Components/LayoutArea/Layout/Layout'
-import './index.css'
-import { store } from './Redux/Store';
-import { interceptor } from './Utils/Interceptor';
+import { createRoot } from "react-dom/client";
+import { BrowserRouter } from "react-router-dom";
+import { createTheme, CssBaseline, ThemeProvider } from "@mui/material";
+import React from "react";
+import { Provider } from "react-redux";
+import { Layout } from "./Components/LayoutArea/Layout/Layout";
+import "./index.css";
+import { store } from "./Redux/Store";
+import { interceptor } from "./Utils/Interceptor";
 
 const theme = createTheme({
     spacing: 8,
     palette: {
         mode: "dark",
+        primary: {
+            main: "#76428a",
+        },
+        info: {
+            main: "#9badb7",
+        },
     },
     shape: {
         borderRadius: 8,
@@ -27,7 +33,7 @@ const theme = createTheme({
                 },
             },
         },
-    }
+    },
     /*components: {
         MuiContainer: {
             styleOverrides: {
@@ -54,10 +60,10 @@ const theme = createTheme({
     },*/
 });
 
-// Register axios interceptor: 
+// Register axios interceptor:
 interceptor.create();
 
-createRoot(document.getElementById('root')!).render(
+createRoot(document.getElementById("root")!).render(
     <React.StrictMode>
         <BrowserRouter>
             <ThemeProvider theme={theme}>
@@ -67,5 +73,5 @@ createRoot(document.getElementById('root')!).render(
                 </Provider>
             </ThemeProvider>
         </BrowserRouter>
-    </React.StrictMode>
-)
+    </React.StrictMode>,
+);

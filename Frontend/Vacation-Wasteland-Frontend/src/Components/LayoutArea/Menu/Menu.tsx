@@ -9,10 +9,6 @@ export function Menu() {
             <Stack direction="row" gap="16px" justifyContent="center">
                 <NavLink to="/home">Vacations</NavLink>
                 <span> | </span>
-                <NavLink to="/register">Register</NavLink>
-                <span> | </span>
-                <NavLink to="/login">Log In</NavLink>
-                <span> | </span>
                 <NavLink to="/recommend">AI Recommendation</NavLink>
                 <span> | </span>
                 <NavLink to="/ask">Ask Anything</NavLink>
