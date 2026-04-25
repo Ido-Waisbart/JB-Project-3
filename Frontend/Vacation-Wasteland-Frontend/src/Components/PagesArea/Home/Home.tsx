@@ -1,4 +1,4 @@
-import { Box, Container, Divider, Stack, Typography, useTheme } from "@mui/material";
+import { Box, Container, Divider, Pagination, Stack, Typography, useTheme } from "@mui/material";
 import "./Home.css";
 import { VacationModel } from "../../../Models/VacationModel";
 import { vacationService } from "../../../Services/VacationService";
@@ -24,9 +24,13 @@ export function Home() {
     // ASSUMPTION: Never both loading AND error.
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<boolean>(false);
-    const allVacations = useSelector((state: AppState) => [...state.vacationState.vacations].sort((v1, v2) => v1.start_date > v2.start_date ? 1 : -1));
+    const allVacations = useSelector((state: AppState) =>
+        [...state.vacationState.vacations].sort((v1, v2) => (v1.start_date > v2.start_date ? 1 : -1)),
+    );
     const user = useSelector((state: AppState) => state.userState!); // ASSUMPTION: If the user was able to access Home.tsx, then userState is surely not null.
     const allLikes = useSelector((state: AppState) => state.likeState.likes);
+
+    const [page, setPage] = useState(1);
 
     useEffect(() => {
         // Load coins if not already loaded
@@ -47,6 +51,10 @@ export function Home() {
             setLoading(false);
         }
     }, []);
+
+    const handlePageChange = (_event: React.ChangeEvent<unknown>, value: number) => {
+        setPage(value);
+    };
 
     return (
         <Container className="Home">
@@ -70,30 +78,41 @@ export function Home() {
                     </Container>
                 )}
                 {!loading && !error && (
-                    <Container
-                        style={{
-                            display: "flex",
-                            justifyContent: "center",
-                            alignItems: "center",
-                            flexWrap: "wrap",
-                            flexDirection: "row",
-                            gap: "32px",
-                        }}
-                    >
-                        {/* {vacations.map((vacation, i) => (
+                    <Box>
+                        <Container
+                            style={{
+                                display: "flex",
+                                justifyContent: "center",
+                                alignItems: "center",
+                                flexWrap: "wrap",
+                                flexDirection: "row",
+                                gap: "32px",
+                            }}
+                        >
+                            {/* {vacations.map((vacation, i) => (
                             <VacationPanel vacation={vacation} key={i} />
                         ))} */}
-                        {allVacations.map((vacation, i) => (
-                            <VacationPanel
-                                vacation={vacation}
-                                key={i}
-                                likedByUser={allLikes.some(
-                                    (like) => like.user_id === user.id && like.vacation_id === vacation.id,
-                                )}
-                                totalLikes={allLikes.filter((like) => like.vacation_id === vacation.id).length}
+                            {allVacations.slice(9 * (page - 1), 9 * (page - 1) + 9).map((vacation, i) => (
+                                <VacationPanel
+                                    vacation={vacation}
+                                    key={i}
+                                    likedByUser={allLikes.some(
+                                        (like) => like.user_id === user.id && like.vacation_id === vacation.id,
+                                    )}
+                                    totalLikes={allLikes.filter((like) => like.vacation_id === vacation.id).length}
+                                />
+                            ))}
+                        </Container>
+
+                        <Box sx={{ display: "flex", justifyContent: "center", padding: "24px", }}>
+                            <Pagination
+                                count={Math.ceil(allVacations.length / 9)}
+                                page={page}
+                                onChange={handlePageChange}
+                                size="large"
                             />
-                        ))}
-                    </Container>
+                        </Box>
+                    </Box>
                 )}
             </Stack>
         </Container>
