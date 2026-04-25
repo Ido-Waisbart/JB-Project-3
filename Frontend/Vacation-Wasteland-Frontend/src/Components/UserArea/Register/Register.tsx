@@ -75,6 +75,12 @@ export function Register() {
                     type="password"
                     fullWidth
                     required
+                    slotProps={{
+                        htmlInput: {
+                            minLength: 4,
+                            maxLength: 32,
+                        },
+                    }}
                 />
 
                 {/* <ReCAPTCHA sitekey={appConfig.recaptchaSiteKey} onChange={saveCaptchaToken} /> */}
