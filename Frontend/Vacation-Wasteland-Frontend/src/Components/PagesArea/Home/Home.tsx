@@ -8,6 +8,7 @@ import { AppState } from "../../../Redux/AppState";
 import { VacationPanel } from "../../VacationArea/VacationCard/VacationCard";
 import { Spinner } from "../../SharedArea/Spinner/Spinner";
 import { BarChart } from "@mui/x-charts/BarChart";
+import { likeService } from "../../../Services/LikeService";
 
 var vacations: VacationModel[] = [];
 // Helpful debug data:
@@ -24,14 +25,14 @@ export function Home() {
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<boolean>(false);
     const allVacations = useSelector((state: AppState) => state.vacationState.vacations);
+    const allLikes = useSelector((state: AppState) => state.likeState.likes);
 
     useEffect(() => {
         // Load coins if not already loaded
         if (allVacations.length === 0) {
             setLoading(true);
             setError(false);
-            vacationService
-                .getAllVacations()
+            Promise.all([vacationService.getAllVacations(), likeService.getAllLikes()])
                 .then(() => {
                     setLoading(false);
                 })
@@ -44,7 +45,7 @@ export function Home() {
         } else {
             setLoading(false);
         }
-    }, [allVacations.length]);
+    }, []);
 
     return (
         <Container className="Home">

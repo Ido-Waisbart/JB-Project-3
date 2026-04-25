@@ -11,6 +11,7 @@ class AppConfig {
     // Server routes: 
 	public readonly vacationsApiUrl = `${this.serverUrl}/vacations/`;
     public readonly usersApiUrl = `${this.serverUrl}/users/`;
+	public readonly likesApiUrl = `${this.serverUrl}/likes/`;
     public readonly registerApiUrl = `${this.serverUrl}/register/`;
     public readonly loginApiUrl = `${this.serverUrl}/login/`;
 }

@@ -8,6 +8,7 @@ import { appConfig } from "./2-utils/app-config";
 import { vacation_controller } from "./5-controllers/vacation-controller";
 import { user_controller } from "./5-controllers/user-controller";
 import { errorsMiddleware } from "./6-middleware/errors-middleware";
+import { like_controller } from "./5-controllers/likes-controller";
 
 class App {
   public start(): void {
@@ -23,6 +24,7 @@ class App {
 
       server.use(vacation_controller.router);
       server.use(user_controller.router);
+      server.use(like_controller.router);
 
       server.use(errorsMiddleware.routeNotFound);
       server.use(errorsMiddleware.catchAll);

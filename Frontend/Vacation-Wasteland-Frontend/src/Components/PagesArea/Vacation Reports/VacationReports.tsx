@@ -5,9 +5,9 @@ import { useSelector } from "react-redux";
 import { AppState } from "../../../Redux/AppState";
 
 export function VacationReports() {
-    // TODO: Put logic in like service. Probably.
+    // TODO: Put logic in like service. Probably. Maybe.
     const allVacations = useSelector((state: AppState) => state.vacationState.vacations);
-    // const allLikes = useSelector((state: AppState) => state.likeState.likes);
+    const allLikes = useSelector((state: AppState) => state.likeState.likes);
     // const barChart_barValueData = allLikes.map(like => like.userId);
     // const barChart_barNameData = allVacations.map((vacation) => vacation.destination);
     // const barChart_barValueData = allVacations.map(vacation => like.userId);
@@ -29,9 +29,8 @@ export function VacationReports() {
         {},
     );
 
-    //allLikes
-    allVacations.forEach((v) => {
-        vacationIdToLikeCount[v.id]++;
+    allLikes.forEach((like) => {
+        vacationIdToLikeCount[like.vacation_id]++;
     });
     const barChart_barValueData = Object.values(vacationIdToLikeCount).map(Number);
 
