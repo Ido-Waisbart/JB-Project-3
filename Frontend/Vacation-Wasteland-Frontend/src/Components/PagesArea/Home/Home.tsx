@@ -24,7 +24,7 @@ export function Home() {
     // ASSUMPTION: Never both loading AND error.
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<boolean>(false);
-    const allVacations = useSelector((state: AppState) => state.vacationState.vacations);
+    const allVacations = useSelector((state: AppState) => [...state.vacationState.vacations].sort((v1, v2) => v1.start_date > v2.start_date ? 1 : -1));
     const user = useSelector((state: AppState) => state.userState!); // ASSUMPTION: If the user was able to access Home.tsx, then userState is surely not null.
     const allLikes = useSelector((state: AppState) => state.likeState.likes);
 
