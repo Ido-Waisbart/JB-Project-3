@@ -1,6 +1,6 @@
-// Taken fron project 2.
+// Taken from project 2.
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-// import { saveSelectedVacationsToLocalStorage, loadSelectedVacationsFromLocalStorage } from "../Utils/LocalStorage";
+import { saveSelectedVacationsToLocalStorage, loadSelectedVacationsFromLocalStorage } from "../Utils/LocalStorage";
 import { VacationModel } from "../Models/VacationModel";
 
 // Init vacations reducer: (Takes an entire vacation array, and sets it to the Redux state.)
@@ -8,15 +8,14 @@ function initVacations(currentState: VacationSliceType, action: PayloadAction<Va
     const newVacations = action.payload;  // Get the new vacations.
     let newState = {...currentState, vacations: [...newVacations]};
     
-    /*
     // Initialize filteredVacations to match vacations if no filter has been applied yet
     // (filteredVacations.length === 0 means no filter has been set)
-    if (newState.filteredVacations.length === 0) {
+    /*if (newState.filteredVacations.length === 0) {
         newState.filteredVacations = [...newVacations];
-    }
+    }*/
     
     // Restore selected vacations from localStorage if they exist and match current vacations
-    if (newState.selectedVacations.length === 0) {
+    if (newState.vacations.length === 0) {
         const storedSelectedVacations = loadSelectedVacationsFromLocalStorage();
         if (storedSelectedVacations.length > 0) {
             // Match stored vacation IDs with the actual vacations
@@ -26,12 +25,12 @@ function initVacations(currentState: VacationSliceType, action: PayloadAction<Va
             
             // Only restore if we found matches (max 6 vacations)
             if (matchedVacations.length > 0 && matchedVacations.length <= 6) {
-                newState.selectedVacations = matchedVacations;
+                newState.vacations = matchedVacations;
                 // Save the matched vacations back to localStorage to ensure data consistency
                 saveSelectedVacationsToLocalStorage(matchedVacations);
             }
         }
-    }*/
+    }
     
     return newState;  // Return the new state.
 }

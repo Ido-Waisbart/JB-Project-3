@@ -1,13 +1,4 @@
-import {
-  Box,
-  Card,
-  Container,
-  Divider,
-  Grid,
-  Stack,
-  Typography,
-  useTheme,
-} from "@mui/material";
+import { Box, Card, Container, Divider, Grid, Stack, Typography, useTheme } from "@mui/material";
 import "./Home.css";
 import { VacationModel } from "../../../Models/VacationModel";
 import { vacationService } from "../../../Services/VacationService";
@@ -27,76 +18,74 @@ var vacations: VacationModel[] = [];
 ];*/
 
 export function Home() {
-  const theme = useTheme();
-  // ASSUMPTION: Never both loading AND error.
-  const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<boolean>(false);
-  const allVacations = useSelector(
-    (state: AppState) => state.vacationState.vacations,
-  );
+    const theme = useTheme();
+    // ASSUMPTION: Never both loading AND error.
+    const [loading, setLoading] = useState<boolean>(true);
+    const [error, setError] = useState<boolean>(false);
+    const allVacations = useSelector((state: AppState) => state.vacationState.vacations);
 
-  useEffect(() => {
-    // Load coins if not already loaded
-    if (allVacations.length === 0) {
-      setLoading(true);
-      setError(false);
-      vacationService
-        .getAllVacations()
-        .then(() => {
-          setLoading(false);
-        })
-        .catch(() => {
-          // Error is already handled by VacationService with notify
-          // But, VacationService will also throw the error, to allow setError() to be called.
-          setError(true);
-          setLoading(false);
-        });
-    } else {
-      setLoading(false);
-    }
-  }, [allVacations.length]);
+    useEffect(() => {
+        // Load coins if not already loaded
+        if (allVacations.length === 0) {
+            setLoading(true);
+            setError(false);
+            vacationService
+                .getAllVacations()
+                .then(() => {
+                    setLoading(false);
+                })
+                .catch(() => {
+                    // Error is already handled by VacationService with notify
+                    // But, VacationService will also throw the error, to allow setError() to be called.
+                    setError(true);
+                    setLoading(false);
+                });
+        } else {
+            setLoading(false);
+        }
+    }, [allVacations.length]);
 
-  return (
-    <Container className="Home">
-      {/* Swap with Box and other stuff belonging to Bootstrap/MUI? */}
-      <Stack style={{ width: "80vw" }} spacing={2}>
-        <Typography typography="h4">Vacations</Typography>
+    return (
+        <Container className="Home">
+            {/* Swap with Box and other stuff belonging to Bootstrap/MUI? */}
+            <Stack style={{ width: "80vw" }} spacing={2}>
+                <Typography typography="h4">Vacations</Typography>
 
-        <Divider variant="middle" />
+                <Divider variant="middle" />
 
-        {loading && (
-          <Container>
-            <Typography>Loading...</Typography>
-            <Box height="32px"/>
-            <Spinner />
-          </Container>
-        )}
-        {error && (
-          <Container>
-            <Typography color="#975555">ERROR: Could not get vacations.</Typography>
-            <Typography>Are you logged in?</Typography>
-          </Container>
-        )}
-        {!loading && !error && (
-          <Container
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              flexWrap: "wrap",
-              flexDirection: "row",
-              gap: "32px",
-            }}
-          >
-            {vacations.map((vacation, i) => (
-              <VacationPanel vacation={vacation} key={i} />
-            ))}
-            {allVacations.map((vacation, i) => (
-              <VacationPanel vacation={vacation} key={i} />
-            ))}
-          </Container>
-        )}
-      </Stack>
-    </Container>
-  );
+                {loading && (
+                    <Container>
+                        <Typography>Loading...</Typography>
+                        <Box height="32px" />
+                        <Spinner />
+                    </Container>
+                )}
+                {error && (
+                    <Container>
+                        <Typography color="#975555">ERROR: Could not get vacations.</Typography>
+                        <Typography>Are you logged in?</Typography>
+                    </Container>
+                )}
+                {!loading && !error && (
+                    <Container
+                        style={{
+                            display: "flex",
+                            justifyContent: "center",
+                            alignItems: "center",
+                            flexWrap: "wrap",
+                            flexDirection: "row",
+                            gap: "32px",
+                        }}
+                    >
+                        {vacations.map((vacation, i) => (
+                            <VacationPanel vacation={vacation} key={i} />
+                        ))}
+                        {allVacations.map((vacation, i) => (
+                            <VacationPanel vacation={vacation} key={i} />
+                        ))}
+                    </Container>
+                )}
+            </Stack>
+        </Container>
+    );
 }

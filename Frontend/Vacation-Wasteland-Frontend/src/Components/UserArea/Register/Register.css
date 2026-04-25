@@ -1,0 +1,11 @@
+.Register > form > * {
+	margin-bottom: 10px;
+}
+
+.Register > .spacing {
+    margin-top: 20px;
+}
+
+.Register .middle {
+    vertical-align: middle;
+}

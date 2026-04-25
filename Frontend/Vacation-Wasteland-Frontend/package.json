@@ -19,6 +19,7 @@
         "axios": "^1.13.1",
         "error-extractor": "^1.0.1",
         "izitoast": "^1.4.0",
+        "jwt-decode": "^4.0.0",
         "notyf": "^3.10.0",
         "openai": "^6.33.0",
         "react": "^19.1.1",

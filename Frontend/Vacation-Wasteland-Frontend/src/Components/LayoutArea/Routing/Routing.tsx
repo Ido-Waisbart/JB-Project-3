@@ -6,8 +6,8 @@ import { Admin } from "../../PagesArea/Admin/Admin";
 import { AIRecommendation } from "../../PagesArea/AI Recommendation/AIRecommendation";
 import { AskAnything } from "../../PagesArea/Ask Anything/AskAnything";
 import { EditVacation } from "../../PagesArea/Edit Vacation/EditVacation";
-import { Login } from "../../PagesArea/Login/Login";
-import { Register } from "../../PagesArea/Register/Register";
+import { Login } from "../../UserArea/Login/Login";
+import { Register } from "../../UserArea/Register/Register";
 import { VacationReports } from "../../PagesArea/Vacation Reports/VacationReports";
 
 export function Routing() {

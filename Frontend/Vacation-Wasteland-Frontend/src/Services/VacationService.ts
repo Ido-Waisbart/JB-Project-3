@@ -25,7 +25,7 @@ class VacationService {
         this.loadingVacationsPromise = (async () => {
             try {
                 // Access backend, which accesses MySQL database:
-                const response = await axios.get<VacationModel[]>(appConfig.allVacationsApiUrl);
+                const response = await axios.get<VacationModel[]>(appConfig.vacationsApiUrl);
                 const vacations = response.data;
 
                 const action = vacationSlice.actions.initVacations(vacations);

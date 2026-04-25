@@ -1,5 +1,5 @@
-// Taken fron project 2.
-/*import { VacationModel } from "../Models/VacationModel";
+// Taken from project 2.
+import { VacationModel } from "../Models/VacationModel";
 import { notify } from "./Notify";
 
 const SELECTED_VACATIONS_STORAGE_KEY = "selectedVacations";
@@ -14,7 +14,8 @@ export function saveSelectedVacationsToLocalStorage(vacations: VacationModel[]):
             start_date: vacation.start_date,
             end_date: vacation.end_date,
             price_in_usd: vacation.price_in_usd,
-            image_uri: vacation.image_uri,
+            // image_uri: vacation.image_uri,  // TODO: ???
+            image_uri: vacation.image_url,
             // symbol: vacation.symbol,
             // name: vacation.name,
             // image: vacation.image
@@ -44,4 +45,3 @@ export function loadSelectedVacationsFromLocalStorage(): VacationModel[] {
         return [];
     }
 }
-*/

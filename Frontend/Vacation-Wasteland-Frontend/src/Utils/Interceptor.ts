@@ -12,7 +12,11 @@ class Interceptor {
 
             // Send in header: 
             if(token) {
-                httpRequest.headers.Authorization = "Bearer " + token;
+                httpRequest.headers.set("Authorization", `Bearer ${token}`);
+                // httpRequest.headers.Authorization = "Bearer " + token;
+            }
+            else{
+                console.warn("Warning: Axios' JWT Token was not found in the local storage.");
             }
 
             // Return:
