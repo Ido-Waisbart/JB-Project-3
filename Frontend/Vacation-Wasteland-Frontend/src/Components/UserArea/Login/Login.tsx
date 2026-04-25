@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { CredentialsModel } from "../../../Models/CredentialsModel";
 import { userService } from "../../../Services/UserService";
 import { Box, Button } from "@mui/material";
-import { BetterTextField } from "../../SharedArea/Spinner/BetterTextField/BetterTextField";
+import { BetterTextField } from "../../SharedArea/BetterTextField/BetterTextField";
 import { AccountCircle } from "@mui/icons-material";
 
 export function Login() {

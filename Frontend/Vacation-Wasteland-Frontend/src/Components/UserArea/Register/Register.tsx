@@ -9,7 +9,7 @@ import { AccountCircle, Cancel } from "@mui/icons-material";
 // import ReCAPTCHA from "react-google-recaptcha";
 import { appConfig } from "../../../Utils/AppConfig";
 import { useState } from "react";
-import { BetterTextField } from "../../SharedArea/Spinner/BetterTextField/BetterTextField";
+import { BetterTextField } from "../../SharedArea/BetterTextField/BetterTextField";
 
 // https://developers.google.com/recaptcha/docs/faq
 
