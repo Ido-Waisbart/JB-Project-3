@@ -5,6 +5,7 @@ import { Container, Stack } from "@mui/material";
 import { useSelector } from "react-redux";
 import { AppState } from "../../../Redux/AppState";
 import { UserState } from "../../../Redux/UserSlice";
+import { Role } from "../../../Models/Enums";
 
 export function Menu() {
     const user = useSelector<AppState, UserState>((state) => state.userState);
@@ -18,17 +19,21 @@ export function Menu() {
                     <span> | </span>
                     <NavLink to="/ask">Ask Anything</NavLink>
                 </Stack>
-                <br />
-                <Stack direction="row" gap="16px" justifyContent="center">
-                    <AdminPanelSettingsIcon />
-                    <NavLink to="/admin">Admin</NavLink>
-                    <span> | </span>
-                    <NavLink to="/add">Add Vacation (Admin)</NavLink>
-                    <span> | </span>
-                    <NavLink to="/edit">Edit Vacation (Admin)</NavLink>
-                    <span> | </span>
-                    <NavLink to="/reports">Reports (Admin)</NavLink>
-                </Stack>
+                {user.role === Role.Admin && (
+                    <>
+                        <br />
+                        <Stack direction="row" gap="16px" justifyContent="center">
+                            <AdminPanelSettingsIcon />
+                            <NavLink to="/admin">Admin</NavLink>
+                            <span> | </span>
+                            <NavLink to="/add">Add Vacation (Admin)</NavLink>
+                            <span> | </span>
+                            <NavLink to="/edit">Edit Vacation (Admin)</NavLink>
+                            <span> | </span>
+                            <NavLink to="/reports">Reports (Admin)</NavLink>
+                        </Stack>
+                    </>
+                )}
             </Container>
         )
     );
