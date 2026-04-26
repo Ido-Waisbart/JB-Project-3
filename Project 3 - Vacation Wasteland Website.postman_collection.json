@@ -1,0 +1,463 @@
+{
+  "info": {
+    "_postman_id": "593f9e19-545a-4c7f-b7bf-f8421ba149b2",
+    "name": "Project 3 - Vacation Wasteland Website",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "32779985"
+  },
+  "item": [
+    {
+      "name": "Get All Vacations",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:4000/api/vacations",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "4000",
+          "path": [
+            "api",
+            "vacations"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get Vacation by ID",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:4000/api/vacations/4",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "4000",
+          "path": [
+            "api",
+            "vacations",
+            "4"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Admin - Upload Vacation",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "destination",
+              "value": "Somewhere in Nevada",
+              "type": "text",
+              "uuid": "63bdb818-938a-4dbb-a02f-0d8bcb2b7216"
+            },
+            {
+              "key": "description",
+              "value": "USA",
+              "type": "text",
+              "uuid": "e42f0712-a033-41c4-992e-f5a1522ab473"
+            },
+            {
+              "key": "price_in_usd",
+              "value": "799",
+              "type": "text",
+              "uuid": "b6778900-3f3d-44b7-bd2c-c84571740689"
+            },
+            {
+              "key": "start_date",
+              "value": "2026-04-24",
+              "type": "text",
+              "uuid": "dd0d081c-f4c3-4dff-a2f8-7434ee8b5d41"
+            },
+            {
+              "key": "end_date",
+              "value": "2026-04-30",
+              "type": "text",
+              "uuid": "6f82eb85-73c0-41c0-b196-62b32c7e8717"
+            },
+            {
+              "key": "image",
+              "type": "file",
+              "uuid": "97215a78-af19-4321-8b98-c270cf897312",
+              "src": "/D:/Users/Ido Waisbart/Downloads/nevada.jpg"
+            }
+          ]
+        },
+        "url": {
+          "raw": "http://localhost:4000/api/vacations",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "4000",
+          "path": [
+            "api",
+            "vacations"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Admin - Update Vacation by ID",
+      "request": {
+        "method": "PUT",
+        "header": [],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "destination",
+              "value": "Nevada's Great Basin National Park, USA",
+              "type": "text",
+              "uuid": "63bdb818-938a-4dbb-a02f-0d8bcb2b7216"
+            },
+            {
+              "key": "description",
+              "value": "A remote Nevada park known for ancient bristlecone pines, striking mountain landscapes, and the Lehman Caves system.",
+              "type": "text",
+              "uuid": "e42f0712-a033-41c4-992e-f5a1522ab473"
+            },
+            {
+              "key": "price_in_usd",
+              "value": "829",
+              "type": "text",
+              "uuid": "b6778900-3f3d-44b7-bd2c-c84571740689"
+            },
+            {
+              "key": "start_date",
+              "value": "2026-04-24",
+              "type": "text",
+              "uuid": "dd0d081c-f4c3-4dff-a2f8-7434ee8b5d41"
+            },
+            {
+              "key": "end_date",
+              "value": "2026-04-30",
+              "type": "text",
+              "uuid": "6f82eb85-73c0-41c0-b196-62b32c7e8717"
+            },
+            {
+              "key": "image",
+              "type": "file",
+              "uuid": "97215a78-af19-4321-8b98-c270cf897312",
+              "src": "/D:/Users/Ido Waisbart/Downloads/nevada.jpg"
+            }
+          ]
+        },
+        "url": {
+          "raw": "http://localhost:4000/api/vacations/19",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "4000",
+          "path": [
+            "api",
+            "vacations",
+            "19"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Admin - Delete Vacation by ID",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:4000/api/vacations/18",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "4000",
+          "path": [
+            "api",
+            "vacations",
+            "18"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get Image URL",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:4000/api/vacations/images/lahaina.jpg",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "4000",
+          "path": [
+            "api",
+            "vacations",
+            "images",
+            "lahaina.jpg"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Admin - Get All Users",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:4000/api/users",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "4000",
+          "path": [
+            "api",
+            "users"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Self - Get User by ID",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:4000/api/users/4",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "4000",
+          "path": [
+            "api",
+            "users",
+            "4"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "0-Token - Register / Sign-Up / Upload User",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "first_name",
+              "value": "Tim",
+              "type": "text",
+              "uuid": "63bdb818-938a-4dbb-a02f-0d8bcb2b7216"
+            },
+            {
+              "key": "last_name",
+              "value": "Bergberg",
+              "type": "text",
+              "uuid": "e42f0712-a033-41c4-992e-f5a1522ab473"
+            },
+            {
+              "key": "email",
+              "value": "timberg@gmail.com",
+              "type": "text",
+              "uuid": "b6778900-3f3d-44b7-bd2c-c84571740689"
+            },
+            {
+              "key": "password",
+              "value": "mySecureUnhashedPassword1",
+              "type": "text",
+              "uuid": "dd0d081c-f4c3-4dff-a2f8-7434ee8b5d41"
+            }
+          ]
+        },
+        "url": {
+          "raw": "http://localhost:4000/api/register",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "4000",
+          "path": [
+            "api",
+            "register"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "0-Token - Log-In",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "email",
+              "value": "timberg@gmail.com",
+              "type": "text",
+              "uuid": "b6778900-3f3d-44b7-bd2c-c84571740689"
+            },
+            {
+              "key": "password",
+              "value": "mySecureUnhashedPassword1",
+              "type": "text",
+              "uuid": "dd0d081c-f4c3-4dff-a2f8-7434ee8b5d41"
+            }
+          ]
+        },
+        "url": {
+          "raw": "http://localhost:4000/api/login",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "4000",
+          "path": [
+            "api",
+            "login"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get All Likes",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:4000/api/likes",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "4000",
+          "path": [
+            "api",
+            "likes"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Like a Vacation",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "user_id",
+              "value": "5",
+              "type": "text",
+              "uuid": "63bdb818-938a-4dbb-a02f-0d8bcb2b7216"
+            },
+            {
+              "key": "vacation_id",
+              "value": "17",
+              "type": "text",
+              "uuid": "e42f0712-a033-41c4-992e-f5a1522ab473"
+            }
+          ]
+        },
+        "url": {
+          "raw": "http://localhost:4000/api/vacations",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "4000",
+          "path": [
+            "api",
+            "vacations"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Unlike a Vacation",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:4000/api/vacations/5/17",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "4000",
+          "path": [
+            "api",
+            "vacations",
+            "5",
+            "17"
+          ]
+        }
+      },
+      "response": []
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{proj3-jwt}}",
+        "type": "string"
+      }
+    ]
+  },
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "proj3-jwt",
+      "value": ""
+    }
+  ]
+}
