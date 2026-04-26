@@ -50,6 +50,16 @@ export function AddVacation() {
                     type="number"
                     fullWidth
                     required
+                    rules={{
+                        min: {
+                            value: 0,
+                            message: "Price cannot be less than 0",
+                        },
+                        max: {
+                            value: 10000,
+                            message: "Price cannot exceed 10000",
+                        },
+                    }}
                     slotProps={{
                         input: {
                             startAdornment: <span>$</span>,

@@ -4,24 +4,20 @@ import { Controller, Control, FieldValues, Path } from "react-hook-form";
 import { TextField, TextFieldProps } from "@mui/material";
 
 type BetterTextFieldProps<T extends FieldValues> = {
-  name: Path<T>;
-  control: Control<T>;
-  label: string;
+    control: Control<T>;
+    name: Path<T>;
+    label: string;
+    rules?: any;
+    type?: string;
 } & TextFieldProps;
 
-export function BetterTextField<T extends FieldValues>({
-  name,
-  control,
-  label,
-  ...props
-}: BetterTextFieldProps<T>) {
-  return (
-    <Controller
-      name={name}
-      control={control}
-      render={({ field }) => (
-        <TextField {...field} label={label} {...props} />
-      )}
-    />
-  );
+export function BetterTextField<T extends FieldValues>({ control, name, rules, label, ...props }: BetterTextFieldProps<T>) {
+    return (
+        <Controller
+            name={name}
+            control={control}
+            rules={rules}
+            render={({ field }) => <TextField {...field} label={label} {...props} />}
+        />
+    );
 }

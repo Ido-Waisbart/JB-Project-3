@@ -38,7 +38,7 @@ export class VacationModel {
         description: joi.string().required().min(2).max(1000),
         start_date: joi.date().required(),
         end_date: joi.date().required(),
-        price_in_usd: joi.number().required().min(0).max(100000),
+        price_in_usd: joi.number().required().min(0).max(10000),
         image: joi.object().optional(),
         image_url: joi.string().optional().max(255),
         image_uri: joi.string().optional().max(50)
