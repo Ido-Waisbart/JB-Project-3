@@ -14,7 +14,7 @@ class AppConfig {
     public readonly loginApiUrl = `${this.serverUrl}/login/`;
 
     // GPT:
-    public readonly mcpServerUrl = "https://pointedly-enteric-yee.ngrok-free.dev/sse";  // TODO
+    public readonly mcpServerUrl = "https://pointedly-enteric-yee.ngrok-free.dev/sse";
     public readonly chatGptCompletionApiUrl = "https://api.openai.com/v1/chat/completions";
 
     // .env:

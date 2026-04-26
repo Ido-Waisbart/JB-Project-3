@@ -1,5 +1,7 @@
 import OpenAI from "openai";
 import axios from "axios";
+import { ChatCompletionCreateParamsNonStreaming } from "openai/resources";
+import { Prompt } from "../Models/Prompt";
 import { appConfig } from "../Utils/AppConfig";
 import { validateAxios } from "../Utils/ValidateAxios";
 import { notify } from "../Utils/Notify";
@@ -24,6 +26,7 @@ type ChatGptResponse = {
     }>;
 };
 
+// TODO: Unneeded?
 /*type VacationDataForAI = {
     name: string;
     current_price_usd: number;
@@ -41,6 +44,27 @@ class ChatGptService {
         dangerouslyAllowBrowser: true, // Only if we really want to do it in the frontend.
     });
 
+    // Get GPT completion: 
+    public async getCompletion(prompt: Prompt): Promise<string> {
+
+        // Data to send: 
+        const body: ChatCompletionCreateParamsNonStreaming = {
+            model: "gpt-5",
+            messages: [
+                { role: "system", content: prompt.systemContent },
+                { role: "user", content: prompt.userContent }
+            ]
+        };
+
+        // Send request: 
+        const response = await this.openai.chat.completions.create(body)
+
+        // Return completion: 
+        const completion = response.choices[0].message.content!;
+        return completion;
+    }
+
+    // TODO: Unneeded?
     /*public async getVacationRecommendation(vacationData: VacationDataForAI): Promise<string> {
         try {
             if (!this.apiKey) {
@@ -70,7 +94,7 @@ RECOMMENDATION: [BUY/DON'T BUY]
 EXPLANATION: [Your explanation here]`;
 
             const request: ChatGptRequest = {
-                model: "gpt-3.5-turbo",
+                model: "gpt-4.1-mini",
                 messages: [
                     {
                         role: "system",
