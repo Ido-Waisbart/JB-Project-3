@@ -4,18 +4,9 @@ import { dal } from "../2-utils/dal";
 import { ResourceNotFoundError } from "../3-models/client-errors";
 import { VacationModel } from "../3-models/vacation-model";
 import { OkPacketParams } from "mysql2";
+import { DateUtils } from "../2-utils/date-utils";
 
 class VacationService {
-  // TODO: Move elsewhere? Utils?
-  public toMySQLDateLocal(date: Date): string {
-    date = new Date(date);
-    const year = date.getFullYear();
-    const month = String(date.getMonth() + 1).padStart(2, "0");
-    const day = String(date.getDate()).padStart(2, "0");
-
-    return `${year}-${month}-${day}`;
-  }
-
   //  Get all vacation.
   //  √
   public async getAllVacations(): Promise<VacationModel[] | undefined> {
@@ -76,8 +67,8 @@ class VacationService {
       vacation.destination,
       vacation.description ?? null,
       vacation.price_in_usd,
-      this.toMySQLDateLocal(vacation.start_date),
-      this.toMySQLDateLocal(vacation.end_date),
+      DateUtils.toMySQLDateLocal(vacation.start_date),
+      DateUtils.toMySQLDateLocal(vacation.end_date),
       image_name,
     ];
 
@@ -112,8 +103,8 @@ class VacationService {
       vacation.destination,
       vacation.description ?? null,
       vacation.price_in_usd,
-      this.toMySQLDateLocal(vacation.start_date),
-      this.toMySQLDateLocal(vacation.end_date),
+      DateUtils.toMySQLDateLocal(vacation.start_date),
+      DateUtils.toMySQLDateLocal(vacation.end_date),
       newImageName,
       vacation.id,
     ];

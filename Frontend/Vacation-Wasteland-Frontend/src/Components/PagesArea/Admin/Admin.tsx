@@ -6,8 +6,11 @@ import { useSelector } from "react-redux";
 import { AppState } from "../../../Redux/AppState";
 import { VacationPanel } from "../../VacationArea/VacationCard/VacationCard";
 import { Spinner } from "../../SharedArea/Spinner/Spinner";
+import { useNavigate } from "react-router-dom";
 
 export function Admin() {
+    const navigate = useNavigate();
+    
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<boolean>(false);
     const allVacations = useSelector((state: AppState) => state.vacationState.vacations);
@@ -66,7 +69,7 @@ export function Admin() {
                 )}
                 {!loading && !error && (
                     <Container>
-                        <Button onClick={() => console.log("add")} variant="contained">
+                        <Button onClick={() => navigate("/add")} variant="contained">
                             Create Vacation
                         </Button>
 

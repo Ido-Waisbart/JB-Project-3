@@ -1,0 +1,16 @@
+.AddVacation {
+    display: flex;
+    justify-content: center;
+}
+
+.AddVacation > form > * {
+	margin-bottom: 10px;
+}
+
+.AddVacation > .spacing {
+    margin-top: 20px;
+}
+
+.AddVacation .middle {
+    vertical-align: middle;
+}

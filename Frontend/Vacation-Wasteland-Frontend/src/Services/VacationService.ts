@@ -4,6 +4,7 @@ import { VacationModel, } from "../Models/VacationModel";
 import { vacationSlice } from "../Redux/VacationSlice";
 import { store } from "../Redux/Store";
 import { validateAxios } from "../Utils/ValidateAxios";
+import { DateUtils } from "../Utils/DateUtils";
 
 
 class VacationService {
@@ -43,6 +44,65 @@ class VacationService {
         })();
 
         return this.loadingVacationsPromise;
+    }
+
+    // Add vacation: 
+    public async addVacation(vacation: VacationModel): Promise<void> {
+
+        // Convert vacation to FormData so it could send also the image: 
+        const myFormData = new FormData();
+        myFormData.append("destination", vacation.destination!);
+        myFormData.append("description", vacation.description!);
+        myFormData.append("start_date", DateUtils.toMySQLDateLocal(vacation.start_date));
+        myFormData.append("end_date", DateUtils.toMySQLDateLocal(vacation.end_date));
+        myFormData.append("price_in_usd", vacation.price_in_usd?.toString()!);
+        myFormData.append("image", vacation.image!);
+
+        // Send vacation to backend:
+        const response = await axios.post<VacationModel>(appConfig.vacationsApiUrl, myFormData);
+
+        // Extract added vacation: 
+        const dbVacation = response.data;
+
+        // Send dbVacation to global state only if global state contains vacations:
+        if (store.getState().vacationState.vacations.length > 0) {
+            const action = vacationSlice.actions.addVacation(dbVacation); // { type: "vacation-slice/addVacation", payload: dbVacation }
+            store.dispatch(action);
+        }
+    }
+
+    // Update vacation: 
+    public async updateVacation(vacation: VacationModel): Promise<void> {
+
+        // Convert vacation to FormData so it could send also the image: 
+        const myFormData = new FormData();
+        myFormData.append("destination", vacation.destination!);
+        myFormData.append("description", vacation.description!);
+        myFormData.append("start_date", DateUtils.toMySQLDateLocal(vacation.start_date));
+        myFormData.append("end_date", DateUtils.toMySQLDateLocal(vacation.end_date));
+        myFormData.append("price_in_usd", vacation.price_in_usd?.toString()!);
+        myFormData.append("image", vacation.image!);
+
+        // Send vacation to backend: 
+        const response = await axios.put<VacationModel>(appConfig.vacationsApiUrl + vacation.id, myFormData);
+
+        // Extract updated vacation: 
+        const dbVacation = response.data;
+
+        // Update vacation in global state:
+        const action = vacationSlice.actions.updateVacation(dbVacation); // { type: "vacation-slice/updateVacation", payload: dbVacation }
+        store.dispatch(action);
+    }
+
+    // Delete vacation from backend: 
+    public async deleteVacation(id: number): Promise<void> {
+
+        // Delete vacation from backend:
+        await axios.delete(appConfig.vacationsApiUrl + id);
+
+        // Delete this vacation from global state: 
+        const action = vacationSlice.actions.deleteVacation(id); // { type: "vacation-slice/deleteVacation", payload: id }
+        store.dispatch(action);
     }
 }
 

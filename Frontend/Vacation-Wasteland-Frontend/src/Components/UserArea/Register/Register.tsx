@@ -94,8 +94,6 @@ export function Register() {
                         {" "}
                         <Cancel /> &nbsp; Clear
                     </Button>
-                    {/* <Button type="button" onClick={() => reset()} color="info" variant="contained" sx={{ flex: 1 }}> <Cancel /> &nbsp; Clear</Button> */}
-                    {/* <Button type="reset" color="info" variant="contained" sx={{ flex: 1 }}> <Cancel /> &nbsp; Clear</Button> */}
                 </Box>
             </form>
         </div>
