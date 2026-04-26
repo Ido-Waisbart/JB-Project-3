@@ -1,8 +1,7 @@
 import "./Admin.css";
 import { Box, Button, Container, Divider, Pagination, Stack, Typography } from "@mui/material";
-import { VacationModel } from "../../../Models/VacationModel";
 import { vacationService } from "../../../Services/VacationService";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useSelector } from "react-redux";
 import { AppState } from "../../../Redux/AppState";
 import { VacationPanel } from "../../VacationArea/VacationCard/VacationCard";
@@ -11,10 +10,10 @@ import { Spinner } from "../../SharedArea/Spinner/Spinner";
 export function Admin() {
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<boolean>(false);
-    const allVacations = useSelector((state: AppState) =>
-        [...state.vacationState.vacations].sort((v1, v2) => (v1.start_date > v2.start_date ? 1 : -1)),
-    );
-    const [filteredVacations, setFilteredVacations] = useState<VacationModel[]>(allVacations);
+    const allVacations = useSelector((state: AppState) => state.vacationState.vacations);
+    const sortedVacations = useMemo(() => {
+        return [...allVacations].sort((v1, v2) => (v1.start_date > v2.start_date ? 1 : -1));
+    }, [allVacations]);
     const user = useSelector((state: AppState) => state.userState!);
 
     const [page, setPage] = useState(1);
@@ -67,6 +66,13 @@ export function Admin() {
                 )}
                 {!loading && !error && (
                     <Container>
+                        <Button onClick={() => console.log("add")} variant="contained">
+                            Create Vacation
+                        </Button>
+
+                        <br />
+                        <br />
+
                         <Container
                             style={{
                                 display: "flex",
@@ -77,7 +83,7 @@ export function Admin() {
                                 gap: "32px",
                             }}
                         >
-                            {filteredVacations.slice(9 * (page - 1), 9 * (page - 1) + 9).map((vacation, i) => (
+                            {sortedVacations.slice(9 * (page - 1), 9 * (page - 1) + 9).map((vacation, i) => (
                                 <VacationPanel
                                     vacation={vacation}
                                     key={i}
@@ -90,7 +96,7 @@ export function Admin() {
 
                         <Box sx={{ display: "flex", justifyContent: "center", padding: "24px" }}>
                             <Pagination
-                                count={Math.ceil(filteredVacations.length / 9)}
+                                count={Math.ceil(sortedVacations.length / 9)}
                                 page={page}
                                 onChange={handlePageChange}
                                 size="large"
