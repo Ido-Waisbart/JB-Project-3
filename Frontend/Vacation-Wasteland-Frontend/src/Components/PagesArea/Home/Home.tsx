@@ -2,7 +2,7 @@ import "./Home.css";
 import { Box, Button, Container, Divider, Pagination, Stack, Typography, useTheme } from "@mui/material";
 import { VacationModel } from "../../../Models/VacationModel";
 import { vacationService } from "../../../Services/VacationService";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useSelector } from "react-redux";
 import { AppState } from "../../../Redux/AppState";
 import { VacationPanel } from "../../VacationArea/VacationCard/VacationCard";
@@ -22,18 +22,25 @@ export function Home() {
     // ASSUMPTION: Never both loading AND error.
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<boolean>(false);
-    const allVacations = useSelector((state: AppState) =>
-        [...state.vacationState.vacations].sort((v1, v2) => (v1.start_date > v2.start_date ? 1 : -1)),
+    const allVacations = useSelector((state: AppState) => state.vacationState.vacations);
+    const sortedVacations = useMemo(() =>
+        {
+            return [...allVacations].sort((v1, v2) => (v1.start_date > v2.start_date ? 1 : -1));
+        }, [allVacations]
     );
-    const [filteredVacations, setFilteredVacations] = useState<VacationModel[]>(allVacations);
+    const [filteredVacations, setFilteredVacations] = useState<VacationModel[]>([]);  // Could in theory use useMemo for this.
     const user = useSelector((state: AppState) => state.userState!); // ASSUMPTION: If the user was able to access Home.tsx, then userState is surely not null.
     const allLikes = useSelector((state: AppState) => state.likeState.likes);
 
     const [page, setPage] = useState(1);
 
     useEffect(() => {
+        setFilteredVacations(sortedVacations);
+    }, [sortedVacations]); // ASSUMPTION: allVacations gets selected only and exactly once.
+
+    useEffect(() => {
         // Load vacations if not already loaded
-        if (allVacations.length === 0) {
+        if (sortedVacations.length === 0) {
             setLoading(true);
             setError(false);
             Promise.all([vacationService.getAllVacations(), likeService.getAllLikes()])
@@ -90,7 +97,7 @@ export function Home() {
                             <Button
                                 onClick={() =>
                                     setFilteredVacations(
-                                        allVacations.filter((v) =>
+                                        sortedVacations.filter((v) =>
                                             allLikes.some(
                                                 (like) => like.user_id === user.id && like.vacation_id === v.id,
                                             ),
@@ -104,7 +111,7 @@ export function Home() {
                             <Button
                                 onClick={() =>
                                     setFilteredVacations(
-                                        allVacations.filter(
+                                        sortedVacations.filter(
                                             (v) => v.end_date > new Date() && new Date() > v.start_date,
                                         ),
                                     )
@@ -115,13 +122,13 @@ export function Home() {
                             </Button>
                             <Button
                                 onClick={() =>
-                                    setFilteredVacations(allVacations.filter((v) => new Date() < v.start_date))
+                                    setFilteredVacations(sortedVacations.filter((v) => new Date() < v.start_date))
                                 }
                                 variant="contained"
                             >
                                 View Upcoming
                             </Button>
-                            <Button onClick={() => setFilteredVacations(allVacations)} variant="contained">
+                            <Button onClick={() => setFilteredVacations(sortedVacations)} variant="contained">
                                 View All
                             </Button>
                         </Container>
@@ -145,7 +152,10 @@ export function Home() {
                                     initiallyLikedByUser={allLikes.some(
                                         (like) => like.user_id === user.id && like.vacation_id === vacation.id,
                                     )}
-                                    initialTotalLikes={allLikes.filter((like) => like.vacation_id === vacation.id).length}
+                                    initialTotalLikes={
+                                        allLikes.filter((like) => like.vacation_id === vacation.id).length
+                                    }
+                                    adminMode={false}
                                 />
                             ))}
                         </Container>
