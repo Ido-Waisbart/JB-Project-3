@@ -1,4 +1,4 @@
-import { Box, Container, Divider, Pagination, Stack, Typography, useTheme } from "@mui/material";
+import { Box, Button, Container, Divider, Pagination, Stack, Typography, useTheme } from "@mui/material";
 import "./Home.css";
 import { VacationModel } from "../../../Models/VacationModel";
 import { vacationService } from "../../../Services/VacationService";
@@ -27,6 +27,7 @@ export function Home() {
     const allVacations = useSelector((state: AppState) =>
         [...state.vacationState.vacations].sort((v1, v2) => (v1.start_date > v2.start_date ? 1 : -1)),
     );
+    const [filteredVacations, setFilteredVacations] = useState<VacationModel[]>(allVacations);
     const user = useSelector((state: AppState) => state.userState!); // ASSUMPTION: If the user was able to access Home.tsx, then userState is surely not null.
     const allLikes = useSelector((state: AppState) => state.likeState.likes);
 
@@ -78,7 +79,57 @@ export function Home() {
                     </Container>
                 )}
                 {!loading && !error && (
-                    <Box>
+                    <Container>
+                        <Container
+                            style={{
+                                display: "flex",
+                                justifyContent: "center",
+                                flexWrap: "wrap",
+                                flexDirection: "row",
+                                gap: "8px",
+                            }}
+                        >
+                            <Button
+                                onClick={() =>
+                                    setFilteredVacations(
+                                        allVacations.filter((v) =>
+                                            allLikes.some(
+                                                (like) => like.user_id === user.id && like.vacation_id === v.id,
+                                            ),
+                                        ),
+                                    )
+                                }
+                                variant="contained"
+                            >
+                                View Liked
+                            </Button>
+                            <Button
+                                onClick={() =>
+                                    setFilteredVacations(
+                                        allVacations.filter(
+                                            (v) => v.end_date > new Date() && new Date() > v.start_date,
+                                        ),
+                                    )
+                                }
+                                variant="contained"
+                            >
+                                View Ongoing
+                            </Button>
+                            <Button
+                                onClick={() =>
+                                    setFilteredVacations(allVacations.filter((v) => new Date() < v.start_date))
+                                }
+                                variant="contained"
+                            >
+                                View Upcoming
+                            </Button>
+                            <Button onClick={() => setFilteredVacations(allVacations)} variant="contained">
+                                View All
+                            </Button>
+                        </Container>
+
+                        <br />
+
                         <Container
                             style={{
                                 display: "flex",
@@ -89,10 +140,7 @@ export function Home() {
                                 gap: "32px",
                             }}
                         >
-                            {/* {vacations.map((vacation, i) => (
-                            <VacationPanel vacation={vacation} key={i} />
-                        ))} */}
-                            {allVacations.slice(9 * (page - 1), 9 * (page - 1) + 9).map((vacation, i) => (
+                            {filteredVacations.slice(9 * (page - 1), 9 * (page - 1) + 9).map((vacation, i) => (
                                 <VacationPanel
                                     vacation={vacation}
                                     key={i}
@@ -104,15 +152,15 @@ export function Home() {
                             ))}
                         </Container>
 
-                        <Box sx={{ display: "flex", justifyContent: "center", padding: "24px", }}>
+                        <Box sx={{ display: "flex", justifyContent: "center", padding: "24px" }}>
                             <Pagination
-                                count={Math.ceil(allVacations.length / 9)}
+                                count={Math.ceil(filteredVacations.length / 9)}
                                 page={page}
                                 onChange={handlePageChange}
                                 size="large"
                             />
                         </Box>
-                    </Box>
+                    </Container>
                 )}
             </Stack>
         </Container>

@@ -17,6 +17,7 @@ export const VacationPanel: React.FC<VacationPanelProps> = (props: VacationPanel
     const user = useSelector((state: AppState) => state.userState!);
     const [likedByUser, setLikedByUser] = useState<boolean>(props.likedByUser);
     const [totalLikes, setTotalLikes] = useState<number>(props.totalLikes);
+    
     function handleToggleFavorite() {
         if (likedByUser) {
             likeService.deleteLike({ user_id: user.id, vacation_id: props.vacation.id } as LikeModel);
@@ -25,7 +26,7 @@ export const VacationPanel: React.FC<VacationPanelProps> = (props: VacationPanel
             likeService.addLike({ user_id: user.id, vacation_id: props.vacation.id } as LikeModel);
             setTotalLikes(totalLikes + 1);
         }
-        setLikedByUser(!props.likedByUser);
+        setLikedByUser(!likedByUser);
     }
 
     return (
