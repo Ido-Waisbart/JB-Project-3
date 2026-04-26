@@ -1,5 +1,5 @@
-import { Box, Button, Container, Divider, Pagination, Stack, Typography, useTheme } from "@mui/material";
 import "./Home.css";
+import { Box, Button, Container, Divider, Pagination, Stack, Typography, useTheme } from "@mui/material";
 import { VacationModel } from "../../../Models/VacationModel";
 import { vacationService } from "../../../Services/VacationService";
 import { useEffect, useState } from "react";
@@ -8,7 +8,6 @@ import { AppState } from "../../../Redux/AppState";
 import { VacationPanel } from "../../VacationArea/VacationCard/VacationCard";
 import { Spinner } from "../../SharedArea/Spinner/Spinner";
 import { likeService } from "../../../Services/LikeService";
-import { LikeModel } from "../../../Models/LikeModel";
 
 // var vacations: VacationModel[] = [];
 // Helpful debug data:
@@ -20,7 +19,6 @@ import { LikeModel } from "../../../Models/LikeModel";
 ];*/
 
 export function Home() {
-    const theme = useTheme();
     // ASSUMPTION: Never both loading AND error.
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<boolean>(false);
@@ -34,7 +32,7 @@ export function Home() {
     const [page, setPage] = useState(1);
 
     useEffect(() => {
-        // Load coins if not already loaded
+        // Load vacations if not already loaded
         if (allVacations.length === 0) {
             setLoading(true);
             setError(false);
@@ -144,10 +142,10 @@ export function Home() {
                                 <VacationPanel
                                     vacation={vacation}
                                     key={i}
-                                    likedByUser={allLikes.some(
+                                    initiallyLikedByUser={allLikes.some(
                                         (like) => like.user_id === user.id && like.vacation_id === vacation.id,
                                     )}
-                                    totalLikes={allLikes.filter((like) => like.vacation_id === vacation.id).length}
+                                    initialTotalLikes={allLikes.filter((like) => like.vacation_id === vacation.id).length}
                                 />
                             ))}
                         </Container>

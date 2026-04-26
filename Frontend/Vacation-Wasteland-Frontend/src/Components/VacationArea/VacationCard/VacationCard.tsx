@@ -1,5 +1,7 @@
 import { Box, Card, Chip, Container, Typography } from "@mui/material";
 import FavoriteIcon from "@mui/icons-material/Favorite";
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteIcon from '@mui/icons-material/Delete';
 import "./VacationCard.css";
 import { VacationModel } from "../../../Models/VacationModel";
 import { likeService } from "../../../Services/LikeService";
@@ -10,20 +12,26 @@ import { useState } from "react";
 
 type VacationPanelProps = {
     vacation: VacationModel;
-    likedByUser: boolean; // Initially?
-    totalLikes: number; // Initial?
+    initiallyLikedByUser: boolean;
+    initialTotalLikes: number;
+    adminMode: boolean;
 };
-export const VacationPanel: React.FC<VacationPanelProps> = (props: VacationPanelProps) => {
+export const VacationPanel: React.FC<VacationPanelProps> = ({
+    vacation,
+    initiallyLikedByUser,
+    initialTotalLikes,
+    adminMode = false,
+}) => {
     const user = useSelector((state: AppState) => state.userState!);
-    const [likedByUser, setLikedByUser] = useState<boolean>(props.likedByUser);
-    const [totalLikes, setTotalLikes] = useState<number>(props.totalLikes);
-    
+    const [likedByUser, setLikedByUser] = useState<boolean>(initiallyLikedByUser);
+    const [totalLikes, setTotalLikes] = useState<number>(initialTotalLikes);
+
     function handleToggleFavorite() {
         if (likedByUser) {
-            likeService.deleteLike({ user_id: user.id, vacation_id: props.vacation.id } as LikeModel);
+            likeService.deleteLike({ user_id: user.id, vacation_id: vacation.id } as LikeModel);
             setTotalLikes(totalLikes - 1);
         } else {
-            likeService.addLike({ user_id: user.id, vacation_id: props.vacation.id } as LikeModel);
+            likeService.addLike({ user_id: user.id, vacation_id: vacation.id } as LikeModel);
             setTotalLikes(totalLikes + 1);
         }
         setLikedByUser(!likedByUser);
@@ -52,11 +60,11 @@ export const VacationPanel: React.FC<VacationPanelProps> = (props: VacationPanel
                 }}
             >
                 <Typography variant="h5">
-                    <u>{props.vacation.destination}</u>
+                    <u>{vacation.destination}</u>
                 </Typography>
                 <Typography>
-                    {new Date(props.vacation.start_date).toLocaleDateString("he-IL")} -{" "}
-                    {new Date(props.vacation.end_date).toLocaleDateString("he-IL")}
+                    {new Date(vacation.start_date).toLocaleDateString("he-IL")} -{" "}
+                    {new Date(vacation.end_date).toLocaleDateString("he-IL")}
                 </Typography>
             </Box>
             <Box
@@ -71,25 +79,65 @@ export const VacationPanel: React.FC<VacationPanelProps> = (props: VacationPanel
             >
                 <Box
                     component="img"
-                    src={props.vacation.image_url ?? "dirthut.jpg"}
+                    src={vacation.image_url ?? "dirthut.jpg"}
                     sx={{ width: "100%", height: "100%", objectFit: "cover" }}
                 />
-                <Chip
-                    clickable
-                    onClick={handleToggleFavorite}
-                    icon={<FavoriteIcon />}
-                    label={"Like " + totalLikes}
-                    size="small"
-                    color={likedByUser ? "primary" : "info"}
-                    sx={{
-                        position: "absolute",
-                        top: 8,
-                        left: 8,
-                        height: 24,
-                        fontWeight: "bold",
-                        boxShadow: 3,
-                    }}
-                />
+                {adminMode && (
+                    <Box
+                        sx={{
+                            position: "absolute",
+                            top: 8,
+                            left: 8,
+                            height: 24,
+                            display: "flex",
+                            justifyContent: "start",
+                            gap: "4px",
+                        }}
+                    >
+                        <Chip
+                            clickable
+                            onClick={() => console.log(1)}
+                            icon={<EditIcon />}
+                            label={"Edit"}
+                            size="small"
+                            color="warning"
+                            sx={{
+                                fontWeight: "bold",
+                                boxShadow: 3,
+                            }}
+                        />
+                        <Chip
+                            clickable
+                            onClick={() => console.log(2)}
+                            icon={<DeleteIcon />}
+                            label={"Delete"}
+                            size="small"
+                            color="error"
+                            sx={{
+                                fontWeight: "bold",
+                                boxShadow: 3,
+                            }}
+                        />
+                    </Box>
+                )}
+                {!adminMode && (
+                    <Chip
+                        clickable
+                        onClick={handleToggleFavorite}
+                        icon={<FavoriteIcon />}
+                        label={"Like " + totalLikes}
+                        size="small"
+                        color={likedByUser ? "primary" : "info"}
+                        sx={{
+                            position: "absolute",
+                            top: 8,
+                            left: 8,
+                            height: 24,
+                            fontWeight: "bold",
+                            boxShadow: 3,
+                        }}
+                    />
+                )}
             </Box>
             <Box
                 sx={{
@@ -118,7 +166,7 @@ export const VacationPanel: React.FC<VacationPanelProps> = (props: VacationPanel
                             alignItems: "center",
                         }}
                     >
-                        <Typography>${props.vacation.price_in_usd}</Typography>
+                        <Typography>${vacation.price_in_usd}</Typography>
                     </Box>
                 </Container>
             </Box>
