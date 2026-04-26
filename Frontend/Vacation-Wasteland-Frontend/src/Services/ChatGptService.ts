@@ -1,3 +1,4 @@
+import OpenAI from "openai";
 import axios from "axios";
 import { appConfig } from "../Utils/AppConfig";
 import { validateAxios } from "../Utils/ValidateAxios";
@@ -34,12 +35,11 @@ type ChatGptResponse = {
 };*/
 
 class ChatGptService {
-    private readonly apiKey: string | undefined;
-
-    constructor() {
-        // API key should be stored in environment variables
-        this.apiKey = import.meta.env.VITE_OPENAI_API_KEY;
-    }
+    // OpenAI configuration:
+    private openai = new OpenAI({
+        apiKey: appConfig.chatGptApiKey,
+        dangerouslyAllowBrowser: true, // Only if we really want to do it in the frontend.
+    });
 
     /*public async getVacationRecommendation(vacationData: VacationDataForAI): Promise<string> {
         try {
@@ -113,6 +113,33 @@ EXPLANATION: [Your explanation here]`;
             throw error;
         }
     }*/
+
+    // Get MCP result:
+    public async getMcpResult(input: string): Promise<string> {
+        // Data to send:
+        const body: OpenAI.Responses.ResponseCreateParams = {
+            model: "gpt-4.1-mini",
+            // TODO: Set-up a mcpServerUrl, like https://pointedly-enteric-yee.ngrok-free.dev/sse.
+            // This will work without this tools member, but this is not like what was taught.
+            /*tools: [
+                {
+                    type: "mcp",
+                    server_label: "VacationMCP",
+                    server_description:
+                        "Vacation Wasteland company MCP server exposing vacation data like details, dates and likes.",
+                    server_url: appConfig.mcpServerUrl,
+                    require_approval: "never",
+                },
+            ],*/
+            input,
+        };
+
+        // Ask AI:
+        const response = await this.openai.responses.create(body);
+
+        // Return output:
+        return response.output_text;
+    }
 }
 
 export const chatGptService = new ChatGptService();
