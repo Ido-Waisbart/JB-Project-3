@@ -136,3 +136,5 @@ dist
 .pnp.*
 /Libraries/Gpt/build
 /Libraries/Restify/build
+Backend/Vacation-Wasteland-Backend/package-lock.json
+Frontend/Vacation-Wasteland-Frontend/package-lock.json
