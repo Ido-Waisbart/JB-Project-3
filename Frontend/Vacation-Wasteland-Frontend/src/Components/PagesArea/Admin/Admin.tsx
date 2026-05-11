@@ -17,7 +17,7 @@ export function Admin() {
     const sortedVacations = useMemo(() => {
         return [...allVacations].sort((v1, v2) => (v1.start_date > v2.start_date ? 1 : -1));
     }, [allVacations]);
-    const user = useSelector((state: AppState) => state.userState!);
+    const user = useSelector((state: AppState) => state.userState!);  // TODO: Unused?
 
     const [page, setPage] = useState(1);
 
