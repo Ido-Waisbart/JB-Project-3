@@ -15,7 +15,7 @@ export function AddVacation() {
 
     async function send(vacation: VacationModel) {
         try {
-            console.log(vacation);
+            // console.log(vacation);
             await vacationService.addVacation(vacation);
             notify.success("Vacation has been added.");
             navigate("/admin");

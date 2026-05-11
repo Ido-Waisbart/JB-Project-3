@@ -50,9 +50,9 @@ export const VacationPanel: React.FC<VacationPanelProps> = ({
     }
 
     async function handleDelete() {
-        console.log("handleDelete(): " + vacation.destination);
+        // console.log("handleDelete(): " + vacation.destination);
 
-        // TODO: Throw error here? In service?
+        // TODO: Throw error here? In service? Trycatch?
         if (confirm("Are you sure you want to delete this vacation?\nThis action is irreversible.")) {
             await vacationService.deleteVacation(vacation.id);
             notify.success("Vacation has been successfully deleted.");
@@ -63,7 +63,7 @@ export const VacationPanel: React.FC<VacationPanelProps> = ({
     // When 'vacation' changes, react to any prop changes.
     // TODO: Is this the right approach? Is there a more appropriate solution?
     useEffect(() => {
-        console.log("VACATION CHANGED! " + initialTotalLikes);
+        // console.log("VACATION CHANGED! " + initialTotalLikes);
         setLikedByUser(initiallyLikedByUser);
         setTotalLikes(initialTotalLikes);
     }, [vacation]);
