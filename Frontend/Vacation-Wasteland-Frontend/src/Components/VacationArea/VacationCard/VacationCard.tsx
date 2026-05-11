@@ -9,6 +9,9 @@ import { useSelector } from "react-redux";
 import { AppState } from "../../../Redux/AppState";
 import { LikeModel } from "../../../Models/LikeModel";
 import { useEffect, useState } from "react";
+import { vacationService } from "../../../Services/VacationService";
+import { notify } from "../../../Utils/Notify";
+import { useNavigate } from "react-router-dom";
 
 type VacationPanelProps = {
     vacation: VacationModel;
@@ -25,6 +28,7 @@ export const VacationPanel: React.FC<VacationPanelProps> = ({
     const user = useSelector((state: AppState) => state.userState!);
     const [likedByUser, setLikedByUser] = useState<boolean>(initiallyLikedByUser);
     const [totalLikes, setTotalLikes] = useState<number>(initialTotalLikes);
+    const navigate = useNavigate();
 
     function handleToggleFavorite() {
         if (likedByUser) {
@@ -35,6 +39,25 @@ export const VacationPanel: React.FC<VacationPanelProps> = ({
             setTotalLikes(totalLikes + 1);
         }
         setLikedByUser(!likedByUser);
+    }
+
+    function handleEdit() {
+        console.log("handleEdit(): " + vacation.destination);
+        // Open edit page with this card's data loaded in.
+        // TODO:
+        //      What about the menu's "edit" option? Do I want it there?
+        //      Same for "Add Vacation (Admin)" - There's already "CREATE VACATION"
+    }
+
+    async function handleDelete() {
+        console.log("handleDelete(): " + vacation.destination);
+
+        // TODO: Throw error here? In service?
+        if (confirm("Are you sure you want to delete this vacation?\nThis action is irreversible.")) {
+            await vacationService.deleteVacation(vacation.id);
+            notify.success("Vacation has been successfully deleted.");
+            navigate("/admin");
+        }
     }
 
     // When 'vacation' changes, react to any prop changes.
@@ -104,7 +127,7 @@ export const VacationPanel: React.FC<VacationPanelProps> = ({
                     >
                         <Chip
                             clickable
-                            onClick={() => console.log(1)}
+                            onClick={handleEdit}
                             icon={<EditIcon />}
                             label={"Edit"}
                             size="small"
@@ -116,7 +139,7 @@ export const VacationPanel: React.FC<VacationPanelProps> = ({
                         />
                         <Chip
                             clickable
-                            onClick={() => console.log(2)}
+                            onClick={handleDelete}
                             icon={<DeleteIcon />}
                             label={"Delete"}
                             size="small"

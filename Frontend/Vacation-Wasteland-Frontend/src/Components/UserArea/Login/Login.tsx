@@ -1,15 +1,15 @@
-import { useForm } from "react-hook-form";
 import "./Login.css";
-import { notify } from "../../../Utils/Notify";
+import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
+import { Box, Button } from "@mui/material";
+import { AccountCircle } from "@mui/icons-material";
 import { CredentialsModel } from "../../../Models/CredentialsModel";
 import { userService } from "../../../Services/UserService";
-import { Box, Button } from "@mui/material";
 import { BetterTextField } from "../../SharedArea/BetterTextField/BetterTextField";
-import { AccountCircle } from "@mui/icons-material";
+import { notify } from "../../../Utils/Notify";
 
 export function Login() {
-    const { control, register, handleSubmit } = useForm<CredentialsModel>();
+    const { control, handleSubmit } = useForm<CredentialsModel>();
     const navigate = useNavigate();
 
     async function send(credentials: CredentialsModel) {
