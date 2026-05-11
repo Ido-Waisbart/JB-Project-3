@@ -23,12 +23,10 @@ export function Home() {
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<boolean>(false);
     const allVacations = useSelector((state: AppState) => state.vacationState.vacations);
-    const sortedVacations = useMemo(() =>
-        {
-            return [...allVacations].sort((v1, v2) => (v1.start_date > v2.start_date ? 1 : -1));
-        }, [allVacations]
-    );
-    const [filteredVacations, setFilteredVacations] = useState<VacationModel[]>([]);  // Could in theory use useMemo for this.
+    const sortedVacations = useMemo(() => {
+        return [...allVacations].sort((v1, v2) => (v1.start_date > v2.start_date ? 1 : -1));
+    }, [allVacations]);
+    const [filteredVacations, setFilteredVacations] = useState<VacationModel[]>([]); // Could in theory use useMemo for this.
     const user = useSelector((state: AppState) => state.userState!); // ASSUMPTION: If the user was able to access Home.tsx, then userState is surely not null.
     const allLikes = useSelector((state: AppState) => state.likeState.likes);
 
@@ -145,19 +143,21 @@ export function Home() {
                                 gap: "32px",
                             }}
                         >
-                            {filteredVacations.slice(9 * (page - 1), 9 * (page - 1) + 9).map((vacation, i) => (
-                                <VacationPanel
-                                    vacation={vacation}
-                                    key={i}
-                                    initiallyLikedByUser={allLikes.some(
-                                        (like) => like.user_id === user.id && like.vacation_id === vacation.id,
-                                    )}
-                                    initialTotalLikes={
-                                        allLikes.filter((like) => like.vacation_id === vacation.id).length
-                                    }
-                                    adminMode={false}
-                                />
-                            ))}
+                            {filteredVacations.slice(9 * (page - 1), 9 * (page - 1) + 9).map((vacation, i) => {
+                                return (
+                                    <VacationPanel
+                                        vacation={vacation}
+                                        key={i}
+                                        initiallyLikedByUser={allLikes.some(
+                                            (like) => like.user_id === user.id && like.vacation_id === vacation.id,
+                                        )}
+                                        initialTotalLikes={
+                                            allLikes.filter((like) => like.vacation_id === vacation.id).length
+                                        }
+                                        adminMode={false}
+                                    />
+                                );
+                            })}
                         </Container>
 
                         <Box sx={{ display: "flex", justifyContent: "center", padding: "24px" }}>

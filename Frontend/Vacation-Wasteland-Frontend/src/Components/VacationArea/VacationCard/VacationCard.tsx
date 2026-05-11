@@ -1,14 +1,14 @@
 import { Box, Card, Chip, Container, Typography } from "@mui/material";
 import FavoriteIcon from "@mui/icons-material/Favorite";
-import EditIcon from '@mui/icons-material/Edit';
-import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from "@mui/icons-material/Edit";
+import DeleteIcon from "@mui/icons-material/Delete";
 import "./VacationCard.css";
 import { VacationModel } from "../../../Models/VacationModel";
 import { likeService } from "../../../Services/LikeService";
 import { useSelector } from "react-redux";
 import { AppState } from "../../../Redux/AppState";
 import { LikeModel } from "../../../Models/LikeModel";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 type VacationPanelProps = {
     vacation: VacationModel;
@@ -36,6 +36,14 @@ export const VacationPanel: React.FC<VacationPanelProps> = ({
         }
         setLikedByUser(!likedByUser);
     }
+
+    // When 'vacation' changes, react to any prop changes.
+    // TODO: Is this the right approach? Is there a more appropriate solution?
+    useEffect(() => {
+        console.log("VACATION CHANGED! " + initialTotalLikes);
+        setLikedByUser(initiallyLikedByUser);
+        setTotalLikes(initialTotalLikes);
+    }, [vacation]);
 
     return (
         <Card
