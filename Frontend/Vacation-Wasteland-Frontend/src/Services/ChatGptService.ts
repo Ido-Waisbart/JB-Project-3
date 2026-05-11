@@ -49,7 +49,7 @@ class ChatGptService {
 
         // Data to send: 
         const body: ChatCompletionCreateParamsNonStreaming = {
-            model: "gpt-5",
+            model: "gpt-4.1-mini",
             messages: [
                 { role: "system", content: prompt.systemContent },
                 { role: "user", content: prompt.userContent }
