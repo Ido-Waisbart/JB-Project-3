@@ -17,6 +17,7 @@ Plan:
 √   Implement missing delete vacation
     (Optional?) Update README.md as needed
     (Optional?) Test JWT Expiration
+    Go through all // TODO's
     Docker containerization
 	Validate Postman Export
 	(W.I.P) Finalize Exported Database Data
