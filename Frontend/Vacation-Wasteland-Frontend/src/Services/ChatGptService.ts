@@ -44,22 +44,21 @@ class ChatGptService {
         dangerouslyAllowBrowser: true, // Only if we really want to do it in the frontend.
     });
 
-    // Get GPT completion: 
+    // Get GPT completion:
     public async getCompletion(prompt: Prompt): Promise<string> {
-
-        // Data to send: 
+        // Data to send:
         const body: ChatCompletionCreateParamsNonStreaming = {
             model: "gpt-4.1-mini",
             messages: [
                 { role: "system", content: prompt.systemContent },
-                { role: "user", content: prompt.userContent }
-            ]
+                { role: "user", content: prompt.userContent },
+            ],
         };
 
-        // Send request: 
-        const response = await this.openai.chat.completions.create(body)
+        // Send request:
+        const response = await this.openai.chat.completions.create(body);
 
-        // Return completion: 
+        // Return completion:
         const completion = response.choices[0].message.content!;
         return completion;
     }
@@ -142,15 +141,21 @@ EXPLANATION: [Your explanation here]`;
     public async getMcpResult(input: string): Promise<string> {
         // Data to send:
         const body: OpenAI.Responses.ResponseCreateParams = {
-            model: "gpt-4.1-mini",
+            // model: "gpt-5",
+            model: "gpt-4.1-mini",  // Even higher risk of overt text, and unformatted [text](url) texts.
             // TODO: Set-up a mcpServerUrl, like https://pointedly-enteric-yee.ngrok-free.dev/sse.
             // This will work without this tools member, but this is not like what was taught.
             tools: [
                 {
                     type: "mcp",
-                    server_label: "Vacation Wasteland MCP",
+                    server_label: "Vacation-Wasteland-MCP",
                     server_description:
-                        "Vacation Wasteland company MCP server exposing vacation data like details, dates and likes.",
+                        "Vacation Wasteland company MCP server exposing vacation data like details, dates and likes." +
+                        "Return plain text only." +
+                        "Do not use markdown." +
+                        "Do not use brackets or links." +
+                        "Do not format output for UI." +
+                        "No follow up questions or questions at all.",
                     server_url: appConfig.mcpServerUrl,
                     require_approval: "never",
                 },

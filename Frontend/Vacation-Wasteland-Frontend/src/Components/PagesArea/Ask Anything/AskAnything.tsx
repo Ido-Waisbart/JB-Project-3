@@ -4,7 +4,7 @@ import { chatGptService } from "../../../Services/ChatGptService";
 import { notify } from "../../../Utils/Notify";
 import "./AskAnything.css";
 import { Spinner } from "../../SharedArea/Spinner/Spinner";
-import { Stack } from "@mui/material";
+import { Button, Input, Stack, TextField, Typography } from "@mui/material";
 
 export function AskAnything() {
     const [question, setQuestion] = useState<string>("");
@@ -30,23 +30,45 @@ export function AskAnything() {
 
     return (
         <div className="AskAnything">
-            <Stack sx={{ width: "80%" }}>
-                <h2>Ask AI anything about our vacations at Vacation Wasteland</h2>
-
-                <div>
-                    <label>Enter your question: </label>
+            <Stack sx={{ width: "80%", display: "flex", alignItems: "center", gap: "16px" }}>
+                <Typography variant="h3">
+                    Ask our AI anything about our
                     <br />
+                    vacations at Vacation Wasteland.
+                </Typography>
 
-                    <input type="text" onChange={handleChange} value={question} />
-                    <span>  </span>
-                    <button onClick={send}>Send</button>
+                <div style={{ width: "50%" }}>
+                    <Typography variant="body1" sx={{ fontSize: "1.75rem", paddingBottom: "8px" }}>
+                        <label htmlFor="question">Enter your question:</label>
+                    </Typography>
+
+                    <TextField
+                        name="question"
+                        id="question"
+                        multiline
+                        onChange={handleChange}
+                        value={question}
+                        fullWidth
+                    />
+
+                    <Button onClick={send} size="medium" variant="contained" sx={{ marginTop: "8px" }}>
+                        Send
+                    </Button>
                 </div>
+
                 <hr />
 
-                <div>
+                <div style={{ width: "60%" }}>
                     {fetching && <Spinner />}
 
-                    {!fetching && answer}
+                    {!fetching && answer && (
+                        <Typography variant="body1" sx={{ fontSize: "1.25rem", lineHeight: "2.5" }}>
+                            <span>
+                                <b>AI:</b>{" "}
+                            </span>
+                            {answer}
+                        </Typography>
+                    )}
                 </div>
             </Stack>
         </div>
