@@ -85,4 +85,7 @@ class Cyber {
 
 }
 
+if(appConfig.jwtSecret === undefined){
+    throw new Error("The backend's .env's JWT Secret is missing. Make sure that the .env are properly updated.");
+}
 export const cyber = new Cyber();
