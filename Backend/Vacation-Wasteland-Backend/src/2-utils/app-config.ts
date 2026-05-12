@@ -13,6 +13,7 @@ class AppConfig {
     public readonly imagesLocation = process.env.IMAGES_LOCATION!;
     public readonly jwtSecret = process.env.JWT_SECRET!;
     public readonly hashSalt = process.env.HASH_SALT!;
+    public readonly mcpServerUrl = "http://localhost:4000/sse";
     // public readonly recaptchaSecretKey = process.env.RECAPTCHA_SECRET_KEY!;
     // public readonly recaptchaUrl = "https://www.google.com/recaptcha/api/siteverify";
 }

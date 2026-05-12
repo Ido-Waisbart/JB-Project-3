@@ -12,6 +12,19 @@ Plan:
         Add some dummy users
         Add some likes from a few more users, for data and graph variety
     Fix MCP Server's ngrok mcpServerUrl (How..?)
+        Make sure to install ngrok for Windows on Swordbox:
+            https://dashboard.ngrok.com/get-started/setup/windows
+        Run `npm install --global ngrok`
+        Run `ngrok config add-authtoken 3Dc4IGRYWv5UCMjVJnlZI02bok3_Smp9fLCRREvpWE3yL6E8`
+            (With token granted by ngrok's website)
+
+        Steps to run ngrok server:
+        1. Run backend.
+        2. Login via postman to any user.
+        3. `ngrok http 4000` in any terminal to connect an ngrok MCP server instance to the backend.
+        4. Use given URL (F.E., https://mobile-overlabor-clergyman.ngrok-free.dev/api/vacations) in Postman
+        5. ?
+        6. Profit
     Make sure that Add Vacation works correctly
     Implement missing edit vacation
 √   Implement missing delete vacation

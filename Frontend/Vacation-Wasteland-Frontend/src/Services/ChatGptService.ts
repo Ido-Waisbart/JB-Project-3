@@ -145,16 +145,16 @@ EXPLANATION: [Your explanation here]`;
             model: "gpt-4.1-mini",
             // TODO: Set-up a mcpServerUrl, like https://pointedly-enteric-yee.ngrok-free.dev/sse.
             // This will work without this tools member, but this is not like what was taught.
-            /*tools: [
+            tools: [
                 {
                     type: "mcp",
-                    server_label: "VacationMCP",
+                    server_label: "Vacation Wasteland MCP",
                     server_description:
                         "Vacation Wasteland company MCP server exposing vacation data like details, dates and likes.",
                     server_url: appConfig.mcpServerUrl,
                     require_approval: "never",
                 },
-            ],*/
+            ],
             input,
         };
 
