@@ -7,14 +7,15 @@ Plan:
 ⋯    Entering "edmonAdmin" instead of proper email stops you from logging in, but doesn't pop up a notif. An issue of validation?
         UPDATE: This seems to pop a notif on Edge, but not Firefox. what then?
 √   Send updated .env's to laptop
-→   Reverse date order is allowed. (9.4.2026 - 1.4.2026)
+√   Reverse date order is allowed. (9.4.2026 - 1.4.2026)
+√   Past dates are allowed. (1.1.1111)
     Populate database:
         Add some vacations that were in the past, for the sake of testing the filters
         Add some dummy users
         Add some likes from a few more users, for data and graph variety
 √   Fix MCP Server's ngrok mcpServerUrl (How..?)
     Make sure that Add Vacation works correctly
-    Implement missing edit vacation
+→   Implement missing edit vacation
 √   Implement missing delete vacation
     (Optional?) Update README.md as needed
     (Optional?) Test JWT Expiration

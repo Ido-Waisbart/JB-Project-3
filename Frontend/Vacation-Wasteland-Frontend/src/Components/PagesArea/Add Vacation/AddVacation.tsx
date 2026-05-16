@@ -10,7 +10,12 @@ import { ImagePicker } from "../../SharedArea/ImagePicker/ImagePicker";
 import { CustomDatePicker } from "../../SharedArea/CustomDatePicker/CustomDatePicker";
 
 export function AddVacation() {
-    const { control, handleSubmit } = useForm<VacationModel>();
+    const { control, handleSubmit, watch, trigger, getValues } = useForm<VacationModel>({
+        mode: "onChange", // Causes validation to also run on change, not only on submit.
+        reValidateMode: "onChange", // Causes React Hook Form to re-run validation for fields that already have an error on change.
+    });
+    const currStartDate = watch("start_date");
+    const currEndDate = watch("end_date");
     const navigate = useNavigate();
 
     async function send(vacation: VacationModel) {
@@ -28,6 +33,12 @@ export function AddVacation() {
         navigate("/admin");
     }
 
+    const ruleNotInPast = (value: string | number | Date | File | undefined) => {
+        if (!value) return true; // "Value required."
+        const today = new Date().toISOString().split("T")[0];
+        return value >= today || "Cannot select past dates";
+    };
+
     return (
         <div className="AddVacation">
             <form onSubmit={handleSubmit(send)} style={{ width: "400px", gap: "12px" }}>
@@ -40,9 +51,57 @@ export function AddVacation() {
                     fullWidth
                     required
                 />
-                {/* <DatePicker name="start_date" label="Start Date" slotProps={{ textField: { fullWidth: true } }} /> */}
-                <CustomDatePicker control={control} name="start_date" label="Start Date" fullWidth required />
-                <CustomDatePicker control={control} name="end_date" label="End Date" fullWidth required />
+                <CustomDatePicker
+                    control={control}
+                    name="start_date"
+                    label="Start Date"
+                    fullWidth
+                    rules={{
+                        required: true,
+                        onChange: (_event) => {
+                            if (currEndDate) trigger("end_date");
+                            // else trigger("start_date");  // validation doesn't happen if the value is <empty string> for example.
+                        },
+                        validate: {
+                            notInPast: ruleNotInPast,
+                            notAfterEndDate: (value) => {
+                                if (value === "" || value == null) return true;
+                                const end_date = getValues("end_date");
+                                if (!end_date) return true;
+                                const start_date = value;
+                                // Helpful for debugging:
+                                console.log(`(start_date) Comparing: ${start_date} <= ${end_date}`);
+                                return start_date <= end_date || "Start date must be before end date";
+                            },
+                        },
+                    }}
+                />
+                <CustomDatePicker
+                    control={control}
+                    name="end_date"
+                    label="End Date"
+                    fullWidth
+                    rules={{
+                        required: true,
+                        onChange: (_event) => {
+                            console.log(_event.target.value);
+                            if (currStartDate) trigger("start_date");
+                            // else trigger("end_date");  // validation doesn't happen if the value is <empty string> for example.
+                        },
+                        validate: {
+                            notInPast: ruleNotInPast,
+                            notBeforeStartDate: (value) => {
+                                if (value === "" || value == null) return true;
+                                const start_date = getValues("start_date");
+                                if (!start_date) return true;
+                                const end_date = value;
+                                // Helpful for debugging:
+                                console.log(`(end_date) Comparing: ${start_date} <= ${end_date}`);
+                                return start_date <= end_date || "Start date must be before end date";
+                            },
+                        },
+                    }}
+                />
                 <BetterTextField
                     control={control}
                     name="price_in_usd"
