@@ -20,6 +20,7 @@ Plan:
     (Optional?) Update README.md as needed
     (Optional?) Test JWT Expiration
     Go through all // TODO's
+    Go through .docx and verify checklist
     Docker containerization
 	Validate Postman Export
 	(W.I.P) Finalize Exported Database Data
