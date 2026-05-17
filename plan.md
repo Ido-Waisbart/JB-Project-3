@@ -9,7 +9,7 @@ Plan:
 √   Send updated .env's to laptop
 √   Reverse date order is allowed. (9.4.2026 - 1.4.2026)
 √   Past dates are allowed. (1.1.1111)
-    Populate database:
+√   Populate database:
         Add some vacations that were in the past, for the sake of testing the filters
         Add some dummy users
         Add some likes from a few more users, for data and graph variety
@@ -24,7 +24,7 @@ Plan:
 √   Go through .docx and verify checklist
     Docker containerization
 √   Validate Postman Export
-	(W.I.P) Finalize Exported Database Data
+√	(W.I.P) Finalize Exported Database Data
     Submit app to Sylla
     Upload project to LinkedIn
     Update webdev resume with this project and its URL
