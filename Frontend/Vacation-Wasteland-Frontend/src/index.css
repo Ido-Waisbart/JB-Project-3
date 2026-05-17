@@ -27,3 +27,15 @@ a:active {
 hr {
     width: 80%;
 }
+
+/* Make Notyf toasts wide enough to read detailed validation messages */
+.notyf__toast {
+    max-width: 550px !important;
+    word-break: break-word !important;
+    white-space: normal !important;
+    text-align: left !important;
+}
+.notyf__message {
+    font-size: 0.95rem !important;
+    line-height: 1.4 !important;
+}

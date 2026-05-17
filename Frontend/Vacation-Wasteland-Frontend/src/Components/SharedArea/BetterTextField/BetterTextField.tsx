@@ -17,7 +17,15 @@ export function BetterTextField<T extends FieldValues>({ control, name, rules, l
             name={name}
             control={control}
             rules={rules}
-            render={({ field }) => <TextField {...field} label={label} {...props} />}
+            render={({ field, fieldState }) => (
+                <TextField
+                    {...field}
+                    label={label}
+                    error={!!fieldState.error}
+                    helperText={fieldState.error?.message}
+                    {...props}
+                />
+            )}
         />
     );
 }

@@ -28,7 +28,7 @@ export class UserModel {
         email: joi.string().email(),
         password: joi.string().required().min(2).max(30).custom(value => {
             if(!passwordStrength.isStrong(value))
-                throw new ValidationError("Weak password...");
+                throw new ValidationError("Weak password. Password must be at least 8 characters long and contain at least 3 of the following groups: uppercase, lowercase, numbers, or special characters.");
         }),
         role: joi.number().optional(),
     });

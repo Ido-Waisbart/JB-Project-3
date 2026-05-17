@@ -4,8 +4,8 @@ Plan:
 √   Test to make sure PNPM removal works
 √   Fix Likes appearing over only 9 cards correctly, carrying over to the next 9 cards
 √   Fix filters not working (At least, VIEW LIKED doesn't render the cards as "liked" - The badge is gray instead of purple)
-⋯    Entering "edmonAdmin" instead of proper email stops you from logging in, but doesn't pop up a notif. An issue of validation?
-        UPDATE: This seems to pop a notif on Edge, but not Firefox. what then?
+√   Entering "edmonAdmin" instead of proper email stops you from logging in, but doesn't pop up a notif. An issue of validation?
+        UPDATE: Resolved by implementing cross-browser programmatic validation on BetterTextField via react-hook-form rules and disabling browser-native validations (noValidate).
 √   Send updated .env's to laptop
 √   Reverse date order is allowed. (9.4.2026 - 1.4.2026)
 √   Past dates are allowed. (1.1.1111)
