@@ -11,8 +11,9 @@ import { DateUtils } from "../Utils/DateUtils";
 
 class VacationService {
     private loadingVacationsPromise: Promise<VacationModel[]> | null = null;
+    private loadingVacationPromises = new Map<number, { promise: Promise<VacationModel>; signal?: AbortSignal }>();
 
-    public async getAllVacations(): Promise<VacationModel[]> {
+    public async getAllVacations(signal?: AbortSignal): Promise<VacationModel[]> {
         // Check if vacations are already loaded in Redux
         const currentState = store.getState();
         if (currentState.vacationState.vacations.length > 0) {
@@ -28,7 +29,7 @@ class VacationService {
         this.loadingVacationsPromise = (async () => {
             try {
                 // Access backend, which accesses MySQL database:
-                const response = await axios.get<VacationModel[]>(appConfig.vacationsApiUrl);
+                const response = await axios.get<VacationModel[]>(appConfig.vacationsApiUrl, { signal });
                 const vacations = response.data;
 
                 const action = vacationSlice.actions.initVacations(vacations);
@@ -46,6 +47,37 @@ class VacationService {
         })();
 
         return this.loadingVacationsPromise;
+    }
+
+    // Get one product from backend: 
+    public async getOneVacation(id: number, signal?: AbortSignal): Promise<VacationModel> {
+
+        // If product already exist in global state - return it:
+        const vacation = store.getState().vacationState.vacations.find(v => v.id === id);
+        if (vacation) {
+            return vacation;
+        }
+
+        // If already loading and the request has not been aborted, return the existing promise
+        const cached = this.loadingVacationPromises.get(id);
+        if (cached && !cached.signal?.aborted) {
+            return cached.promise;
+        }
+
+        // Create a new loading promise
+        const promise = (async () => {
+            try {
+                const response = await axios.get<VacationModel>(appConfig.vacationsApiUrl + id, { signal });
+                this.loadingVacationPromises.delete(id);
+                return response.data;
+            } catch (error) {
+                this.loadingVacationPromises.delete(id);
+                throw error;
+            }
+        })();
+
+        this.loadingVacationPromises.set(id, { promise, signal });
+        return promise;
     }
 
     // Add vacation: 

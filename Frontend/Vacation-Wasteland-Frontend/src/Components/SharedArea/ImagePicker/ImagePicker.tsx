@@ -8,6 +8,7 @@ type ImagePickerProps<T extends FieldValues> = {
     label?: string;
     fullWidth?: boolean;
     required?: boolean;
+    imageUrl?: string;
 };
 
 export function ImagePicker<T extends FieldValues>({
@@ -16,12 +17,21 @@ export function ImagePicker<T extends FieldValues>({
     label,
     fullWidth = false,
     required = false,
+    imageUrl,
 }: ImagePickerProps<T>) {
     const [preview, setPreview] = useState<string | null>(null);
 
     useEffect(() => {
+        if (imageUrl) {
+            setPreview(imageUrl);
+        }
+    }, [imageUrl]);
+
+    useEffect(() => {
         return () => {
-            if (preview) URL.revokeObjectURL(preview);
+            if (preview && preview.startsWith("blob:")) {
+                URL.revokeObjectURL(preview);
+            }
         };
     }, [preview]);
 

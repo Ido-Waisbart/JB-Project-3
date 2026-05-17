@@ -28,8 +28,6 @@ export function Menu() {
                             <span> | </span>
                             <NavLink to="/add">Add Vacation (Admin)</NavLink>
                             <span> | </span>
-                            <NavLink to="/edit">Edit Vacation (Admin)</NavLink>
-                            <span> | </span>
                             <NavLink to="/reports">Reports (Admin)</NavLink>
                         </Stack>
                     </>

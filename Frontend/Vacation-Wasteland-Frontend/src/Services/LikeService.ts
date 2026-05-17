@@ -8,7 +8,7 @@ import { validateAxios } from "../Utils/ValidateAxios";
 class LikeService {
     private loadingLikesPromise: Promise<LikeModel[]> | null = null;
 
-    public async getAllLikes(): Promise<LikeModel[]> {
+    public async getAllLikes(signal?: AbortSignal): Promise<LikeModel[]> {
         // Check if likes are already loaded in Redux
         const currentState = store.getState();
         if (currentState.likeState.likes.length > 0) {
@@ -24,7 +24,7 @@ class LikeService {
         this.loadingLikesPromise = (async () => {
             try {
                 // Access backend, which accesses MySQL database:
-                const response = await axios.get<LikeModel[]>(appConfig.likesApiUrl);
+                const response = await axios.get<LikeModel[]>(appConfig.likesApiUrl, { signal });
                 const likes = response.data;
 
                 const action = likeSlice.actions.initLikes(likes);

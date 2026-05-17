@@ -14,9 +14,10 @@ Plan:
         Add some dummy users
         Add some likes from a few more users, for data and graph variety
 √   Fix MCP Server's ngrok mcpServerUrl (How..?)
-    Make sure that Add Vacation works correctly
+√   Make sure that Add Vacation works correctly
 →   Implement missing edit vacation
 √   Implement missing delete vacation
+    Delete unneeded .css files.
     (Optional?) Update README.md as needed
     (Optional?) Test JWT Expiration
     Go through all // TODO's

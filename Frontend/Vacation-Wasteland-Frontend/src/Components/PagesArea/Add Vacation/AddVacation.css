@@ -1,13 +1,22 @@
 .AddVacation {
     display: flex;
     justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 16px;
 }
 
-.AddVacation > form > * {
-	margin-bottom: 10px;
+.AddVacation>form {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
 }
 
-.AddVacation > .spacing {
+.AddVacation>form>* {
+    margin-bottom: 10px;
+}
+
+.AddVacation>.spacing {
     margin-top: 20px;
 }
 

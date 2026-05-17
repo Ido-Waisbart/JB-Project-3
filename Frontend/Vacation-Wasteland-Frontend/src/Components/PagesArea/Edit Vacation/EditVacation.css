@@ -1,0 +1,25 @@
+.EditVacation {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.EditVacation>form {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.EditVacation>form>* {
+    margin-bottom: 10px;
+}
+
+.EditVacation>.spacing {
+    margin-top: 20px;
+}
+
+.EditVacation .middle {
+    vertical-align: middle;
+}

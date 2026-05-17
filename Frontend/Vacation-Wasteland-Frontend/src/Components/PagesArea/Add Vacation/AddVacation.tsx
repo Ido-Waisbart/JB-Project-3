@@ -1,10 +1,10 @@
+import "./AddVacation.css";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { notify } from "../../../Utils/Notify";
-import "./AddVacation.css";
 import { VacationModel } from "../../../Models/VacationModel";
 import { vacationService } from "../../../Services/VacationService";
-import { Box, Button } from "@mui/material";
+import { Box, Button, Typography } from "@mui/material";
 import { BetterTextField } from "../../SharedArea/BetterTextField/BetterTextField";
 import { ImagePicker } from "../../SharedArea/ImagePicker/ImagePicker";
 import { CustomDatePicker } from "../../SharedArea/CustomDatePicker/CustomDatePicker";
@@ -18,9 +18,8 @@ export function AddVacation() {
     const currEndDate = watch("end_date");
     const navigate = useNavigate();
 
-    async function send(vacation: VacationModel) {
+    async function submitForm(vacation: VacationModel) {
         try {
-            // console.log(vacation);
             await vacationService.addVacation(vacation);
             notify.success("Vacation has been added.");
             navigate("/admin");
@@ -33,6 +32,7 @@ export function AddVacation() {
         navigate("/admin");
     }
 
+    // Is the given date in the past?
     const ruleNotInPast = (value: string | number | Date | File | undefined) => {
         if (!value) return true; // "Value required."
         const today = new Date().toISOString().split("T")[0];
@@ -41,7 +41,8 @@ export function AddVacation() {
 
     return (
         <div className="AddVacation">
-            <form onSubmit={handleSubmit(send)} style={{ width: "400px", gap: "12px" }}>
+            <Typography variant="button">Adding...</Typography>
+            <form onSubmit={handleSubmit(submitForm)} style={{ width: "400px", gap: "12px" }}>
                 <BetterTextField control={control} name="destination" label="Destination" fullWidth required />
                 <BetterTextField
                     control={control}
@@ -131,7 +132,7 @@ export function AddVacation() {
 
                 <Box sx={{ display: "flex", width: "100%", gap: "8px" }}>
                     <Button type="submit" color="primary" variant="contained" sx={{ flex: 2.5 }}>
-                        Register
+                        Add
                     </Button>
                     <Button type="button" onClick={handleCancel} color="info" variant="contained" sx={{ flex: 1 }}>
                         Cancel

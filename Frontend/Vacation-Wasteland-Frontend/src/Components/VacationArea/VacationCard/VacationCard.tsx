@@ -43,6 +43,7 @@ export const VacationPanel: React.FC<VacationPanelProps> = ({
 
     function handleEdit() {
         console.log("handleEdit(): " + vacation.destination);
+        navigate("/edit/" + vacation.id);
         // Open edit page with this card's data loaded in.
         // TODO:
         //      What about the menu's "edit" option? Do I want it there?

@@ -19,7 +19,7 @@ export function Routing() {
             <Route path="/admin" element={<Admin />} />
             <Route path="/recommend" element={<AIRecommendation />} />
             <Route path="/ask" element={<AskAnything />} />
-            <Route path="/edit" element={<EditVacation />} />
+            <Route path="/edit/:id" element={<EditVacation />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/reports" element={<VacationReports />} />
