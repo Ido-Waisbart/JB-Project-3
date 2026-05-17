@@ -93,40 +93,51 @@ export function Home() {
                             }}
                         >
                             <Button
-                                onClick={() =>
+                                onClick={() => {
                                     setFilteredVacations(
                                         sortedVacations.filter((v) =>
                                             allLikes.some(
                                                 (like) => like.user_id === user.id && like.vacation_id === v.id,
                                             ),
                                         ),
-                                    )
-                                }
+                                    );
+                                    setPage(1);
+                                }}
                                 variant="contained"
                             >
                                 View Liked
                             </Button>
                             <Button
-                                onClick={() =>
+                                onClick={() => {
                                     setFilteredVacations(
                                         sortedVacations.filter(
                                             (v) => v.end_date > new Date() && new Date() > v.start_date,
                                         ),
-                                    )
-                                }
+                                    );
+                                    setPage(1);
+                                }}
                                 variant="contained"
                             >
                                 View Ongoing
                             </Button>
                             <Button
-                                onClick={() =>
-                                    setFilteredVacations(sortedVacations.filter((v) => new Date() < v.start_date))
-                                }
+                                onClick={() => {
+                                    setFilteredVacations(
+                                        sortedVacations.filter((v) => new Date() < v.start_date),
+                                    );
+                                    setPage(1);
+                                }}
                                 variant="contained"
                             >
                                 View Upcoming
                             </Button>
-                            <Button onClick={() => setFilteredVacations(sortedVacations)} variant="contained">
+                            <Button
+                                onClick={() => {
+                                    setFilteredVacations(sortedVacations);
+                                    setPage(1);
+                                }}
+                                variant="contained"
+                            >
                                 View All
                             </Button>
                         </Container>
