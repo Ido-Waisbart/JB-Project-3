@@ -21,7 +21,7 @@ services:
   # ⚙️ Backend API Container
   backend:
     build:
-      context: ./Backend/Vacation-Wasteland-Backend
+      context: ./Backend
       dockerfile: Dockerfile
     container_name: vacation-wasteland-backend
     restart: always
@@ -45,7 +45,7 @@ services:
   # 💻 Frontend Web Container
   frontend:
     build:
-      context: ./Frontend/Vacation-Wasteland-Frontend
+      context: ./Frontend
       dockerfile: Dockerfile
     container_name: vacation-wasteland-frontend
     restart: always
