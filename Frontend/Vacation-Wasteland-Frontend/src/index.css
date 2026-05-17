@@ -1,4 +1,6 @@
-html, body, #root {
+html,
+body,
+#root {
     /* https://coolors.co/palette/0d1321-1d2d44-3e5c76-748cab-f0ebd8 */
     --ink-black: #0d1321ff;
     --deep-space-blue: #1d2d44ff;
@@ -14,9 +16,11 @@ html, body, #root {
 a:link {
     color: var(--dusty-denim);
 }
+
 a:visited {
     color: var(--blue-slate);
 }
+
 /*a:hover {
     color: var(--eggshell);
 }*/
@@ -28,14 +32,38 @@ hr {
     width: 80%;
 }
 
-/* Make Notyf toasts wide enough to read detailed validation messages */
+/* Make Notyf toasts wide enough and highly readable */
 .notyf__toast {
     max-width: 550px !important;
     word-break: break-word !important;
     white-space: normal !important;
     text-align: left !important;
+    border-radius: 8px !important;
+    /* Premium rounded modern cards */
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4) !important;
+    /* Premium deep shadow */
 }
+
+/* Override the ripple background container to fill 100% of the toast solidly using Notyf's native green/red colors */
+.notyf__ripple {
+    height: 100% !important;
+    width: 100% !important;
+    border-radius: 0 !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    transform: none !important;
+    animation: none !important;
+}
+
 .notyf__message {
     font-size: 0.95rem !important;
     line-height: 1.4 !important;
+    text-align: left !important;
+}
+
+.notyf__wrapper {
+    padding: 15px 20px !important;
+    align-items: center !important;
 }
