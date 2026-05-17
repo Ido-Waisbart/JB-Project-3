@@ -111,7 +111,7 @@ export function Home() {
                                 onClick={() => {
                                     setFilteredVacations(
                                         sortedVacations.filter(
-                                            (v) => v.end_date > new Date() && new Date() > v.start_date,
+                                            (v) => new Date(v.end_date) > new Date() && new Date() > new Date(v.start_date),
                                         ),
                                     );
                                     setPage(1);
@@ -123,7 +123,7 @@ export function Home() {
                             <Button
                                 onClick={() => {
                                     setFilteredVacations(
-                                        sortedVacations.filter((v) => new Date() < v.start_date),
+                                        sortedVacations.filter((v) => new Date() < new Date(v.start_date)),
                                     );
                                     setPage(1);
                                 }}
