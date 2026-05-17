@@ -1,0 +1,66 @@
+version: '3.8'
+
+services:
+  # 🗄️ MySQL Database Container
+  database:
+    image: mysql:8.0
+    container_name: vacation-wasteland-db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: woRount1!
+      MYSQL_DATABASE: vacation_wasteland
+    ports:
+      - "3307:3306"
+    volumes:
+      - db-data:/var/lib/mysql
+      # Automatically initialize the database using your SQL backup file on first startup
+      - ./Database/jbproj3_initial_data.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - app-network
+
+  # ⚙️ Backend API Container
+  backend:
+    build:
+      context: ./Backend/Vacation-Wasteland-Backend
+      dockerfile: Dockerfile
+    container_name: vacation-wasteland-backend
+    restart: always
+    ports:
+      - "4000:4000"
+    environment:
+      ENVIRONMENT: development
+      PORT: 4000
+      MYSQL_HOST: database  # Connects to the 'database' container on the shared network
+      MYSQL_USER: root
+      MYSQL_PASSWORD: woRount1!
+      MYSQL_DATABASE: vacation_wasteland
+      JWT_SECRET: "vacation_wasteland::ido_waisbart::b7f3c9e8a21d4f6b9c0a5e7d2f8c1b6a9d3e4f7c2a8b1d6e9f0c3a5b7d2e8f1"
+      HASH_SALT: "IdoWaisbart-45800-3-Proj3"
+      IMAGES_LOCATION: "http://localhost:4000/api/vacations/images/"
+    depends_on:
+      - database
+    networks:
+      - app-network
+
+  # 💻 Frontend Web Container
+  frontend:
+    build:
+      context: ./Frontend/Vacation-Wasteland-Frontend
+      dockerfile: Dockerfile
+    container_name: vacation-wasteland-frontend
+    restart: always
+    ports:
+      - "80:80"  # Exposes the Nginx server on port 80 (http://localhost)
+    depends_on:
+      - backend
+    networks:
+      - app-network
+
+# 💾 Persistent volumes so MySQL data isn't lost when containers stop
+volumes:
+  db-data:
+
+# 🌐 Isolated internal network for secure service communication
+networks:
+  app-network:
+    driver: bridge

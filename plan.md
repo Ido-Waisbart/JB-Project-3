@@ -22,7 +22,7 @@ Plan:
 √   (Optional?) Test JWT Expiration
 √   Go through all // TODO's
 √   Go through .docx and verify checklist
-    Docker containerization
+√   Docker containerization
 √   Validate Postman Export
 √	(W.I.P) Finalize Exported Database Data
     Submit app to Sylla

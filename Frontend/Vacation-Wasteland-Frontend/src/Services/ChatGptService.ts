@@ -3,7 +3,7 @@ import { ChatCompletionCreateParamsNonStreaming } from "openai/resources";
 import { Prompt } from "../Models/Prompt";
 import { appConfig } from "../Utils/AppConfig";
 
-type ChatGptMessage = {
+export type ChatGptMessage = {
     role: "system" | "user" | "assistant";
     content: string;
 };

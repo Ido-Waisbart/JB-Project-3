@@ -7,14 +7,12 @@ import { useNavigate } from "react-router-dom";
 import { Box, Button } from "@mui/material";
 import { AccountCircle, Cancel } from "@mui/icons-material";
 // import ReCAPTCHA from "react-google-recaptcha";
-import { appConfig } from "../../../Utils/AppConfig";
-import { useState } from "react";
 import { BetterTextField } from "../../SharedArea/BetterTextField/BetterTextField";
 
 // https://developers.google.com/recaptcha/docs/faq
 
 export function Register() {
-    const { control, register, handleSubmit, reset } = useForm<UserModel>({
+    const { control, handleSubmit, reset } = useForm<UserModel>({
         defaultValues: {
             first_name: "",
             last_name: "",

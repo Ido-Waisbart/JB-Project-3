@@ -91,7 +91,7 @@ export function VacationReports() {
                     {
                         data: barChart_barValueData,
                         label: "Vacation Likes",
-                        valueFormatter: (value, context) => "" + value,
+                        valueFormatter: (value) => "" + value,
                     },
                 ]}
                 height={300}
