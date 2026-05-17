@@ -418,6 +418,27 @@
         }
       },
       "response": []
+    },
+    {
+      "name": "MCP - Get All Vacations",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "https://mobile-overlabor-clergyman.ngrok-free.dev/api/vacations",
+          "protocol": "https",
+          "host": [
+            "mobile-overlabor-clergyman",
+            "ngrok-free",
+            "dev"
+          ],
+          "path": [
+            "api",
+            "vacations"
+          ]
+        }
+      },
+      "response": []
     }
   ],
   "auth": {
