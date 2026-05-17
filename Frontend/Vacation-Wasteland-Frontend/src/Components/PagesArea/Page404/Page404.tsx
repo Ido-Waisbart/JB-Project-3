@@ -1,4 +1,3 @@
-import "./Page404.css";
 
 export function Page404() {
 

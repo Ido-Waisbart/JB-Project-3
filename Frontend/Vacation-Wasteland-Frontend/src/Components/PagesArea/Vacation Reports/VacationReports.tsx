@@ -1,5 +1,4 @@
 import { BarChart } from "@mui/x-charts";
-import "./VacationReports.css";
 import { Box, Button, Typography } from "@mui/material";
 import { useSelector } from "react-redux";
 import { AppState } from "../../../Redux/AppState";
