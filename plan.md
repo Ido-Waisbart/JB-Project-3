@@ -24,7 +24,7 @@ Plan:
 √   Go through .docx and verify checklist
 √   Docker containerization
 √   Validate Postman Export
-√	(W.I.P) Finalize Exported Database Data
+√	Finalize Exported Database Data
     Submit app to Sylla
     Upload project to LinkedIn
     Update webdev resume with this project and its URL
