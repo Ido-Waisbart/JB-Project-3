@@ -65,7 +65,6 @@ export function validateAxios(error: any) {
         // Non-Axios error
         const errorKey = `unexpected-error-${String(error)}`;
         if (shouldShowNotification(errorKey)) {
-            // notify.error('Unexpected error:', error);
             notify.error('Unexpected error:' + error);
         }
     }

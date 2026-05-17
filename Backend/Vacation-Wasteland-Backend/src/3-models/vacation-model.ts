@@ -1,5 +1,3 @@
-// TODO: Cleanup
-
 import joi from "joi";
 import { UploadedFile } from "express-fileupload";
 import { ValidationError } from "./client-errors";
@@ -7,14 +5,10 @@ import { ValidationError } from "./client-errors";
 export class VacationModel {
     public id!: number;
     public destination!: string;
-    // public description: string;
-    // public description!: string;
     public description?: string;
     public start_date!: Date;
     public end_date!: Date;
     public price_in_usd!: number;
-    // public image_uri: string;
-    // public image_uri!: string;
     public image: UploadedFile;  // Not in the database.
     public image_url?: string;  // Not in the database.
     public image_uri?: string;  // Identifier/name. F.E., athens.jpg.

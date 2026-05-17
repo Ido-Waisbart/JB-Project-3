@@ -42,18 +42,10 @@ export const VacationPanel: React.FC<VacationPanelProps> = ({
     }
 
     function handleEdit() {
-        console.log("handleEdit(): " + vacation.destination);
         navigate("/edit/" + vacation.id);
-        // Open edit page with this card's data loaded in.
-        // TODO:
-        //      What about the menu's "edit" option? Do I want it there?
-        //      Same for "Add Vacation (Admin)" - There's already "CREATE VACATION"
     }
 
     async function handleDelete() {
-        // console.log("handleDelete(): " + vacation.destination);
-
-        // TODO: Throw error here? In service? Trycatch?
         if (confirm("Are you sure you want to delete this vacation?\nThis action is irreversible.")) {
             await vacationService.deleteVacation(vacation.id);
             notify.success("Vacation has been successfully deleted.");
@@ -62,9 +54,7 @@ export const VacationPanel: React.FC<VacationPanelProps> = ({
     }
 
     // When 'vacation' changes, react to any prop changes.
-    // TODO: Is this the right approach? Is there a more appropriate solution?
     useEffect(() => {
-        // console.log("VACATION CHANGED! " + initialTotalLikes);
         setLikedByUser(initiallyLikedByUser);
         setTotalLikes(initialTotalLikes);
     }, [vacation]);

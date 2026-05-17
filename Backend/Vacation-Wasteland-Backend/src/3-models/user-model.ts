@@ -10,9 +10,7 @@ export class UserModel {
     public last_name!: string;
     public email!: string;
     public password!: string;
-    // public password_hash: string;
     public role!: Role;
-    // public captchaToken: string;  // TODO: Is this needed?
 
     public constructor(user: UserModel) {
         this.id = user.id;
@@ -21,7 +19,6 @@ export class UserModel {
         this.email = user.email;
         this.password = user.password;
         this.role = user.role;
-        // this.captchaToken = user.captchaToken;
     }
 
     private static schema = joi.object({
@@ -34,7 +31,6 @@ export class UserModel {
                 throw new ValidationError("Weak password...");
         }),
         role: joi.number().optional(),
-        // captchaToken: joi.string().required().min(100).max(5000)
     });
 
     public validate(): void {

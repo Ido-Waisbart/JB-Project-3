@@ -1,4 +1,3 @@
-// TODO OPTIONAL: Should this be put in a shared folder that both backend and frontend can use? A library?
 export class DateUtils {
   public static toMySQLDateLocal(date: Date): string {
     date = new Date(date);

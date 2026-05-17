@@ -40,12 +40,6 @@ export function Register() {
         }
     }
 
-    // TODO: Is this even needed?
-    /*function saveCaptchaToken(captchaToken: string | null): void {
-        console.log(captchaToken);
-        setCaptchaToken(captchaToken);
-    }*/
-
     const handleReset = () => {
         reset();
         (document.activeElement as HTMLElement)?.blur();

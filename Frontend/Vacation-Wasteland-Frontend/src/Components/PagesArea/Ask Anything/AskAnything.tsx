@@ -1,10 +1,9 @@
-// TODO: Prettify
 import { ChangeEvent, useState } from "react";
 import { chatGptService } from "../../../Services/ChatGptService";
 import { notify } from "../../../Utils/Notify";
 import "./AskAnything.css";
 import { Spinner } from "../../SharedArea/Spinner/Spinner";
-import { Button, Input, Stack, TextField, Typography } from "@mui/material";
+import { Button, Stack, TextField, Typography } from "@mui/material";
 
 export function AskAnything() {
     const [question, setQuestion] = useState<string>("");

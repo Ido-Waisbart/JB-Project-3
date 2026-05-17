@@ -86,7 +86,6 @@ export function EditVacation() {
                             required: true,
                             onChange: (_event) => {
                                 if (currEndDate) trigger("end_date");
-                                // else trigger("start_date");  // validation doesn't happen if the value is <empty string> for example.
                             },
                             validate: {
                                 notAfterEndDate: (value) => {
@@ -94,8 +93,6 @@ export function EditVacation() {
                                     const end_date = getValues("end_date");
                                     if (!end_date) return true;
                                     const start_date = value;
-                                    // Helpful for debugging:
-                                    console.log(`(start_date) Comparing: ${start_date} <= ${end_date}`);
                                     return start_date <= end_date || "Start date must be before end date";
                                 },
                             },
@@ -109,9 +106,7 @@ export function EditVacation() {
                         rules={{
                             required: true,
                             onChange: (_event) => {
-                                console.log(_event.target.value);
                                 if (currStartDate) trigger("start_date");
-                                // else trigger("end_date");  // validation doesn't happen if the value is <empty string> for example.
                             },
                             validate: {
                                 notBeforeStartDate: (value) => {
@@ -119,8 +114,6 @@ export function EditVacation() {
                                     const start_date = getValues("start_date");
                                     if (!start_date) return true;
                                     const end_date = value;
-                                    // Helpful for debugging:
-                                    console.log(`(end_date) Comparing: ${start_date} <= ${end_date}`);
                                     return start_date <= end_date || "Start date must be before end date";
                                 },
                             },

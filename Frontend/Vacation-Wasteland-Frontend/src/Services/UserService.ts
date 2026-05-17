@@ -14,8 +14,7 @@ class UserService {
 
         // If exists:
         if (token) {
-            // ASSUMPTION: Token is valid. (TODO OPTIONAL: If the token is invalid, do something about it.)
-
+            // Restore user if token is valid and not expired:
             // Extract user:
             const container = jwtDecode<{ user: UserModel; exp: number }>(token);
 

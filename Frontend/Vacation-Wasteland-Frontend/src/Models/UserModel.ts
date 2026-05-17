@@ -5,5 +5,4 @@ export class UserModel {
     public email?: string;
     public password?: string;
     public role?: string;
-    // public captchaToken?: string;  // TODO: Is this used?
 }

@@ -7,13 +7,8 @@ import { OkPacketParams } from "mysql2";
 import { DateUtils } from "../2-utils/date-utils";
 
 class VacationService {
-  //  Get all vacation.
-  //  √
+  // Get all vacations:
   public async getAllVacations(): Promise<VacationModel[] | undefined> {
-    // Debug data:
-    // let v: VacationModel = {id: 1, destination: "Somewhere in Nevada", description: "USA", start_date: new Date(), end_date: new Date(), price_in_usd: 799};
-    // return [v];
-
     const sql = "select *, concat(?, image_uri) as image_url from vacations";
     const values = [appConfig.imagesLocation];
 
@@ -29,8 +24,7 @@ class VacationService {
     return vacations;
   }
 
-  //  Get one vacation.
-  //  TODO: Is this even used?
+  // Get one vacation by id:
   public async getOneVacation(id: number): Promise<VacationModel> {
     // Create sql:
     const sql =
@@ -50,7 +44,7 @@ class VacationService {
     return vacation;
   }
 
-  //  Add vacation:
+  // Add vacation:
   public async addVacation(vacation: VacationModel): Promise<VacationModel> {
     // Validation:
     vacation.validate();
@@ -85,7 +79,7 @@ class VacationService {
     return dbVacation;
   }
 
-  //  Update vacation:
+  // Update vacation:
   public async updateVacation(vacation: VacationModel): Promise<VacationModel> {
     // Validation:
     vacation.validate();
@@ -125,7 +119,7 @@ class VacationService {
     return dbVacation;
   }
 
-  //  Delete vacation:
+  // Delete vacation:
   public async deleteVacation(id: number): Promise<void> {
     // Get old image:
     const oldImageName = await this.getImageName(id);
@@ -147,8 +141,7 @@ class VacationService {
     await fileSaver.delete(oldImageName!);
   }
 
-  //  TODO
-  //  Get vacations by price range:
+  // Get vacations by price range:
   public async getVacationsByPriceRange(
     min: number,
     max: number,
@@ -165,9 +158,7 @@ class VacationService {
     return vacations;
   }
 
-  // Get image name from db.
-  // Used only within this file, vacation-service.ts.
-  //  √
+  // Get image name from db:
   private async getImageName(id: number): Promise<string | null> {
     const sql = "select image_uri from vacations where id = ?";
     const values = [id];

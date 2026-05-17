@@ -35,12 +35,8 @@ function exportToCSV(data: any[], filename = "vacation-likes.csv") {
 }
 
 export function VacationReports() {
-    // TODO: Put logic in like service. Probably. Maybe.
     const allVacations = useSelector((state: AppState) => state.vacationState.vacations);
     const allLikes = useSelector((state: AppState) => state.likeState.likes);
-    // const barChart_barValueData = allLikes.map(like => like.userId);
-    // const barChart_barNameData = allVacations.map((vacation) => vacation.destination);
-    // const barChart_barValueData = allVacations.map(vacation => like.userId);
     const barChart_barValueDataMap: Record<number, string> = allVacations.reduce<Record<number, string>>(
         (dict, vacation) => {
             dict[vacation.id] = vacation.destination;

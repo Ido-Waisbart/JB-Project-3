@@ -15,8 +15,6 @@ class Dal {
 
   constructor() {
     console.log("Connecting with " + JSON.stringify(this.options));
-    // connection = mysql2.createPool(this.options);  // Make sure the declaration of connection has no initialization.
-    // console.log("Connected!");  // is createPool() async? If yes, this line is incorrect.
   }
 
   public execute(
@@ -28,7 +26,6 @@ class Dal {
         reject(new Error("Query timeout"));
       }, 5000);
 
-      // console.log("Querying with " + JSON.stringify(this.options));
       this.connection.query(
         sql,
         values,
