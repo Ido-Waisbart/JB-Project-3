@@ -22,6 +22,9 @@ FROM nginx:alpine
 # Copy the compiled production assets from Stage 1 to Nginx's public directory
 COPY --from=build /app/dist /usr/share/nginx/html
 
+# Copy the custom Nginx configuration for React SPA routing fallback
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+
 # Expose port 80 (HTTP standard)
 EXPOSE 80
 
