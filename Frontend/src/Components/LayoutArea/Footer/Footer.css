@@ -1,0 +1,4 @@
+.Footer {
+    padding: 32px;
+    background-image: linear-gradient(to right, transparent, rgba(0, 0, 0, 0.35), transparent);
+}
